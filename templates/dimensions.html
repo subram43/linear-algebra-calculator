@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dimensions</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+
+    {% if res == 'det' %}
+            <p>You have chosen to calculate the determinant of two matrices</p>
+    {% endif %}
+
+
+    {% if res == 'matmul' %}
+            <p>You have chosen to multiply two matrices together</p>
+    {% endif %}
+
+    {% if res == 'eig' %}
+            <p>You have chosen to compute the eigenvalues and eigenvectors of a matrix</p>
+    {% endif %}
+
+
+
+</body>
+</html>
