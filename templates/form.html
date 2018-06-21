@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Form</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+    {% if choice == 'det' %}
+
+        <h3>Determinant Calculator</h3>
+
+        <form action = "http://localhost:5000/detresult" method = "POST">
+
+        {% for i in range(0, dim) %}
+            {% for j in range(0, dim) %}
+                <label style="padding-right: 1%;">
+                    <input class="matrixentry" type="text" style="width: 3.5%" name="num[{{ i }}][{{ j }}]">
+                </label>
+            {% endfor %}
+
+            <br><br>
+        {% endfor %}
+
+        <br>
+        <br>
+
+        <input type="submit" value="submit">
+
+        </form>
+
+
+    {% endif %}
+
+    {% if detstr != null %}
+        <p>Determinant = {{ detstr }} </p>
+    {% endif %}
+
+
+
+
+</body>
+</html>
