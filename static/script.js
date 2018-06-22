@@ -1,2 +1,7 @@
-var m_1_2 = document.querySelector('#m12');
-var m_2_1 = document.querySelector('#m21');
+function changeOne() {
+    $("#m21").val($("#m12").val()).change();
+}
+
+function changeTwo() {
+    $("#m12").val($("#m21").val()).change();
+}

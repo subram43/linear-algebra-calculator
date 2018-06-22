@@ -22,4 +22,6 @@ def matmulform():
 @matmul.route("/matmulresult", methods=['POST'])
 def matmulresult():
 
-    return render_template('form.html')
+    if request.method == 'POST':
+
+        return render_template('form.html')
