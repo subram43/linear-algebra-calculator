@@ -14,3 +14,7 @@ input.matrixentry {
 h1.error {
     color: red;
 }
+
+div {
+    float: left;
+}

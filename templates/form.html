@@ -31,15 +31,6 @@
             {% endfor %}
         </table>
 
-        <!--{% for i in range(0, dim) %}-->
-            <!--{% for j in range(0, dim) %}-->
-                <!--<label style="padding-right: 1%;">-->
-                    <!--<input class="matrixentry" type="text" style="width: 3.5%" name="num[{{ i }}][{{ j }}]">-->
-                <!--</label>-->
-            <!--{% endfor %}-->
-
-            <!--<br><br>-->
-        <!--{% endfor %}-->
 
         <br>
         <br>
@@ -51,6 +42,67 @@
 
     {% if detstr != null %}
         <p>Determinant = {{ detstr }} </p>
+    {% endif %}
+
+
+    {% if choice == 'matmul' %}
+        <h3>Matrix Multiplication Calculator</h3>
+
+
+        <form action = "http://localhost:5000/matmulresult" method = "POST">
+
+            <div style="margin-right: 10%;">
+                Matrix One:
+
+                <br>
+
+                <table border="1%">
+                    {% for i in range(0, m1_1) %}
+
+                        <tr>
+
+                        {% for j in range(0, m1_2) %}
+                            <td>
+                                <input class="matrixentry" type="text" name="matrixOne[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
+                            </td>
+                        {% endfor %}
+
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+
+
+            <div>
+                Matrix Two:
+
+                <br>
+
+                <table border="1%">
+                    {% for i in range(0, m2_1) %}
+
+                        <tr>
+
+                        {% for j in range(0, m2_2) %}
+                            <td>
+                                <input class="matrixentry" type="text" name="MatrixTwo[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
+                            </td>
+                        {% endfor %}
+
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+
+
+            <br>
+            <br>
+
+            <input type="submit" value="submit">
+
+        </form>
     {% endif %}
 
 
