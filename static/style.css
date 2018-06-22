@@ -2,6 +2,15 @@ h1 {
     color: deeppink;
 }
 
-input {
-    width: 4px;
+input.matrixentry {
+    width: 100%;
+    padding: 1%;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+h1.error {
+    color: red;
 }
