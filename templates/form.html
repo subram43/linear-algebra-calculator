@@ -63,7 +63,7 @@
 
                         {% for j in range(0, m1_2) %}
                             <td>
-                                <input class="matrixentry" type="text" name="matrixOne[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
+                                <input class="matrixentry" type="text" name="matrixOne[{{ i }}][{{ j }}]" {% if matrixOneString != null %}  value="{{ matrixOneString[i][j] }}" {% endif %} >
                             </td>
                         {% endfor %}
 
@@ -86,7 +86,7 @@
 
                         {% for j in range(0, m2_2) %}
                             <td>
-                                <input class="matrixentry" type="text" name="MatrixTwo[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
+                                <input class="matrixentry" type="text" name="matrixTwo[{{ i }}][{{ j }}]" {% if matrixTwoString != null %}  value="{{ matrixTwoString[i][j] }}" {% endif %} >
                             </td>
                         {% endfor %}
 
@@ -103,6 +103,38 @@
             <input type="submit" value="submit">
 
         </form>
+    {% endif %}
+
+    {% if matmulresult != null %}
+        <div>
+            _
+
+            <br>
+
+
+
+            {% for i in range(0, m1_1) %}
+
+                | &nbsp;
+
+
+                {% for j in range(0, m1_2) %}
+
+
+                    {{ matrixOneString[i][j] }}
+
+                    &nbsp; &nbsp; &nbsp;
+
+                {% endfor %}
+
+                |
+
+                <br>
+            {% endfor %}
+
+            _
+
+        </div>
     {% endif %}
 
 
