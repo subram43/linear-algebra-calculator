@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Blueprint
 from scipy import linalg
 from Functions import intvalue
+import fractions
 import numpy as np
 import re
 
@@ -102,7 +103,7 @@ def matmulresult():
 
                 input = str(request.form.get("matrixTwo[" + str(i) + "][" + str(j) + "]"))
 
-                fraction = "\d+/\d+"
+                fraction = "-?\d+/\d+"
 
                 try:
                     if re.match(fraction, input):
@@ -112,10 +113,10 @@ def matmulresult():
 
                             input = intvalue(input)
 
-                            if np.abs(np.ceil(input) - input) < 0.000000000001:
+                            if np.abs(np.ceil(float(input)) - float(input)) < 0.000000000001:
                                 input = np.ceil(input)
-                            elif np.abs(input - np.floor(input) < 0.000000000001):
-                                input = np.floor(input)
+                            elif np.abs(float(input) - np.floor(float(input)) < 0.000000000001):
+                                input = np.floor(float(input))
 
                             row.append(float(input))
                     else:
@@ -130,12 +131,21 @@ def matmulresult():
             matrixTwoList.append(row)
 
 
-        matrixOne = np.array(matrix_one_list)
-        matrixTwo = np.array(matrixTwoList)
+        matrix_one = np.array(matrix_one_list)
+        matrix_two = np.array(matrixTwoList)
 
 
+        matmulresult = np.matmul(matrix_one, matrix_two)
+        resultdimensions = matmulresult.shape
 
-        matmulresult = np.matmul(matrixOne, matrixTwo)
+        matmulresult = matmulresult.tolist()
+
+
+        for i in range(0, resultdimensions[0]):
+
+            for j in range(0, resultdimensions[1]):
+                matmulresult[i][j] = fractions.Fraction(matmulresult[i][j]).limit_denominator()
+
 
         if m2d2 == 1:
             return render_template('form.html', choice="matmul", columnvector="true", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)

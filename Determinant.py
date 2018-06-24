@@ -39,7 +39,7 @@ def detResult():
 
                 input = str(request.form.get("num[" + str(i) + "][" + str(j) + "]"))
 
-                fraction = "\d+/\d+"
+                fraction = "-?\d+/\d+"
 
                 try:
                     if re.match(fraction, input):

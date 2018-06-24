@@ -40,7 +40,7 @@ def eigresult():
 
                 input = str(request.form.get("matrix[" + str(i) + "][" + str(j) + "]"))
 
-                fraction = "\d+/\d+"
+                fraction = "-?\d+/\d+"
 
                 try:
                     if re.match(fraction, input):

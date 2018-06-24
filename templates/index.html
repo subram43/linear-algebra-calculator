@@ -28,8 +28,10 @@
                 <option disabled {% if selected == -1 %} selected="selected" {% endif %}></option>
                 <option value="det" {% if selected == 0 %} selected="selected"  {% endif %}  {% if selected != -1 and selected != 0 %} disabled {% endif %}>determinant</option>
                 <option value="matmul" {% if selected == 1 %} selected="selected" {% endif %} {% if selected != -1 and selected != 1 %} disabled {% endif %}>matrix multiply</option>
-                <option value="eig" {% if selected == 2 %} selected="selected" {% endif %}  {% if selected != -1 and selected != 2 %} disabled {% endif %}> eigenvectors</option>
+                <option value="rref" {% if selected == 2 %} selected="selected" {% endif %}  {% if selected != -1 and selected != 2 %} disabled {% endif %}> reduced echelon form</option>
                 <option value="inv" {% if selected == 3 %} selected="selected" {% endif %} {% if selected != -1 and selected != 3 %} disabled  {% endif %}>inverse of matrix</option>
+                <option value="eig" {% if selected == 4 %} selected="selected" {% endif %}  {% if selected != -1 and selected != 4 %} disabled {% endif %}> eigenvectors</option>
+
             </select>
 
             <br>
@@ -129,6 +131,25 @@
             </form>
         {% endif %}
 
+        {% if res == 'rref' %}
+            <form action="http://localhost:5000/rrefform" method="POST">
+                Choose the dimensions of your matrix:
+                <select name="dim1">
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+
+                <select name="dim2">
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+
+                <input type="submit" value="submit">
+            </form>
+        {% endif %}
+
         {% if res == 'eig' %}
             <form action="http://localhost:5000/eigform" method="POST">
                 Choose the dimension of your matrix:
@@ -141,6 +162,8 @@
                 <input type="submit" value="submit">
             </form>
         {% endif %}
+
+
     </div>
 </body>
 </html>

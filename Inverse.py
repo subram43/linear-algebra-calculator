@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, Blueprint
 from scipy import linalg
 from Functions import intvalue
 import numpy as np
+import fractions
 import re
 
 
@@ -40,7 +41,7 @@ def invresult():
 
                 input = request.form.get("matrix[" + str(i) + "][" + str(j) + "]")
 
-                fraction = "\d+/\d+"
+                fraction = "-?\d+/\d+"
 
                 try:
                     if re.match(fraction, input):
@@ -71,7 +72,16 @@ def invresult():
         try:
             inv = np.linalg.inv(matrix)
 
-            inv = inv.round(5)
+            resultdimensions = inv.shape
+
+            inv = inv.tolist()
+
+            for i in range(0, resultdimensions[0]):
+
+                for j in range(0, resultdimensions[1]):
+                    inv[i][j] = fractions.Fraction(inv[i][j]).limit_denominator()
+
+
         except np.linalg.LinAlgError:
             return render_template('form.html', choice="inv", dim=dim, matrixString=matrix_string, singular="true", error="Matrix Error", message="The matrix you entered is singular, so the inverse cannot be found")
 

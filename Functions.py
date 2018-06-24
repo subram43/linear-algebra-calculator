@@ -2,7 +2,7 @@ import re
 
 def intvalue(value):
 
-    fraction = "(\d+)/(\d+)"
+    fraction = "(-?\d+)/(\d+)"
 
     reobj = re.search(fraction, value)
 

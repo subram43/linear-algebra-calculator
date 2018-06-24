@@ -4,6 +4,7 @@ from Determinant import determinant
 from MatrixMultiply import matmul
 from Inverse import inverse
 from Eigenspace import eigenspace
+from Rref import rref
 import numpy as np
 import re
 
@@ -12,6 +13,7 @@ application.register_blueprint(determinant)
 application.register_blueprint(matmul)
 application.register_blueprint(inverse)
 application.register_blueprint(eigenspace)
+application.register_blueprint(rref)
 
 @application.route("/")
 def index():
@@ -32,11 +34,14 @@ def dimensions():
         elif res == 'matmul':
             selected = 1
 
-        elif res == 'eig':
+        elif res == 'rref':
             selected = 2
 
         elif res == 'inv':
             selected = 3
+
+        elif res == 'eig':
+            selected = 4
 
         return render_template("index.html", res=res, selected=selected)
 
