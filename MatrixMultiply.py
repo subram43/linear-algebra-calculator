@@ -39,8 +39,8 @@ def matmulresult():
 
 
 
-        matrixOneList = []
-        matrixOneString = []
+        matrix_one_list = []
+        matrix_one_string = []
 
 
         for i in range(0, m1d1):
@@ -71,13 +71,13 @@ def matmulresult():
                         srow.append(input)
 
                         row.append(float(input))
-                except:
+                except ValueError:
                     return render_template('error.html', error="Value Error", message="You entered invalid values")
 
 
 
-            matrixOneString.append(srow)
-            matrixOneList.append(row)
+            matrix_one_string.append(srow)
+            matrix_one_list.append(row)
 
         i = 0; j = 0
 
@@ -130,7 +130,7 @@ def matmulresult():
             matrixTwoList.append(row)
 
 
-        matrixOne = np.array(matrixOneList)
+        matrixOne = np.array(matrix_one_list)
         matrixTwo = np.array(matrixTwoList)
 
 
@@ -138,7 +138,7 @@ def matmulresult():
         matmulresult = np.matmul(matrixOne, matrixTwo)
 
         if m2d2 == 1:
-            return render_template('form.html', choice="matmul", columnvector="true", matmulresult=matmulresult, matrixOneString=matrixOneString, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
+            return render_template('form.html', choice="matmul", columnvector="true", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
 
 
-        return render_template('form.html', choice="matmul", matmulresult=matmulresult, matrixOneString=matrixOneString, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
+        return render_template('form.html', choice="matmul", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)

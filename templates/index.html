@@ -48,13 +48,6 @@
             <br>
         </form>
 
-        {% if det != null: %}
-            <p>HELLO</p>
-        {% endif %}
-
-
-
-
         {% if res == 'det' %}
 
 
@@ -63,26 +56,10 @@
 
                 <select name="detdim">
 
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+
                 </select>
 
 
@@ -103,51 +80,15 @@
                 Matrix One Dimensions:
 
                 <select name="matrixOneDimOne">
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
                 </select>
 
                 <select name="matrixOneDimTwo" id="m12" onchange="changeOne()">
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
                 </select>
 
                 <br>
@@ -155,51 +96,15 @@
                 Matrix Two Dimensions:
 
                 <select name="matrixTwoDimOne" id="m21" onchange="changeTwo()">
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
                 </select>
 
                 <select name="matrixTwoDimTwo">
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
                 </select>
 
 
@@ -213,29 +118,10 @@
         {% if res == 'inv' %}
             <form action = "http://localhost:5000/invform" method="POST">
                 Choose the dimension of your matrix:
-
                 <select name="invdim">
-
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
                 </select>
 
 
@@ -244,14 +130,17 @@
         {% endif %}
 
         {% if res == 'eig' %}
-            <p>You have chosen to compute the eigenvalues and eigenvectors of a matrix</p>
+            <form action="http://localhost:5000/eigform" method="POST">
+                Choose the dimension of your matrix:
+                <select name="eigdim">
+                    {% for i in range(1, 21) %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+
+                <input type="submit" value="submit">
+            </form>
         {% endif %}
-
-
     </div>
-
 </body>
-
-
-
 </html>

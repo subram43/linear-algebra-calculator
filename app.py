@@ -3,6 +3,7 @@ from scipy import linalg
 from Determinant import determinant
 from MatrixMultiply import matmul
 from Inverse import inverse
+from Eigenspace import eigenspace
 import numpy as np
 import re
 
@@ -10,6 +11,7 @@ application = Flask(__name__)
 application.register_blueprint(determinant)
 application.register_blueprint(matmul)
 application.register_blueprint(inverse)
+application.register_blueprint(eigenspace)
 
 @application.route("/")
 def index():

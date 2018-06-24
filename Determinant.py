@@ -29,8 +29,8 @@ def detResult():
 
         dim = i
 
-        matrixList = []
-        matrixString = []
+        matrix_list = []
+        matrix_string = []
 
         for i in range(0, dim):
             row = []
@@ -57,10 +57,10 @@ def detResult():
                 except ValueError:
                     return render_template('error.html', error="Value Error", message="You entered invalid values")
 
-            matrixString.append(srow)
-            matrixList.append(row)
+            matrix_string.append(srow)
+            matrix_list.append(row)
 
-        matrix = np.array(matrixList)
+        matrix = np.array(matrix_list)
 
         det = linalg.det(matrix)
 
@@ -71,7 +71,7 @@ def detResult():
 
         detstr = str(det)
 
-        return render_template('form.html', choice="det", matrix=matrixString, detstr=detstr, dim=dim)
+        return render_template('form.html', choice="det", matrix=matrix_string, detstr=detstr, dim=dim)
 
 
 

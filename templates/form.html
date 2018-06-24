@@ -227,6 +227,7 @@
     {% endif %}
 
 
+    <!--Matrix Inverse-->
 
     {% if choice == 'inv' %}
         <h3>Matrix Inverse Calculator</h3>
@@ -305,6 +306,88 @@
         <h1 class="error">{{ error }}</h1>
 
         <p>{{ message }}</p>
+    {% endif %}
+
+
+
+    <!--Eigenspace Calculator-->
+
+    {% if choice == 'eig' %}
+        <h3>Eigenspace Calculator</h3>
+
+        <form action="http://localhost:5000/eigresult" method="POST">
+
+            <table class="matrix">
+                {% for i in range(0, dim) %}
+
+                    <tr>
+
+                    {% for j in range(0, dim) %}
+                        <td class="matrixCell">
+                            <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrixString != null %}  value="{{ matrixString[i][j] }}" {% endif %} >
+                        </td>
+                    {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+            <br>
+            <br>
+
+            <input type="submit" value="submit">
+
+            <br>
+            <br>
+            <br>
+
+        </form>
+
+
+
+    {% endif %}
+
+
+    {% if eigenspace != null %}
+
+        <div class="display">
+            {% for i in range(0, dim) %}
+                <br>
+            {% endfor %}
+            Eigenspace of
+        </div>
+
+        <div class="display">
+            <table class="matrix">
+                {% for i in range(0, dim) %}
+                    <tr>
+                        {% for j in range(0, dim) %}
+                            <td class="matrixText">{{ matrixString[i][j] }}</td>
+                        {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </div>
+
+        <div class="display">
+            {% for i in range(0, dim) %}
+                <br>
+            {% endfor %}
+            =
+        </div>
+
+        <br clear="all">
+        <br>
+        <br>
+
+        <div class="display">
+            &lambda;
+        </div>
+
     {% endif %}
 
 
