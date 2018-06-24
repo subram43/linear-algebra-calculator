@@ -2,6 +2,10 @@ h1 {
     color: deeppink;
 }
 
+body {
+    margin-left: 2%;
+}
+
 input.matrixentry {
     width: 100%;
     padding: 1%;
@@ -15,6 +19,90 @@ h1.error {
     color: red;
 }
 
+
 div {
     float: left;
+}
+
+div.display {
+    margin-left: 2%;
+}
+
+div.matmuldisplay {
+    margin-left: 2%;
+    margin-bottom: 27px;
+}
+
+div.childDiv {
+    margin-right: 5%;
+    display: inline-block;
+    margin-bottom: 10px;
+
+}
+
+.matrix {
+    position: relative;
+}
+
+.matrix:before, .matrix:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid;
+    width: 6px;
+    height: 100%;
+}
+
+.matrix:before {
+    left: -6px;
+    border-right: 0;
+}
+
+.matrix:after {
+    right: -6px;
+    border-left: 0;
+}
+
+.matrix td {
+    padding: 10px;
+    text-align: center;
+}
+
+
+.matrixDet {
+    position: relative;
+}
+
+.matrixDet:before, .matrixDet:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 1px solid;
+    height: 100%;
+}
+
+.matrixDet:before {
+    left: -6px;
+    border-right: 0;
+}
+
+.matrixDet:after {
+    right: -6px;
+    border-left: 0;
+}
+
+.matrixDet td {
+    padding: 8px;
+    text-align: center;
+}
+
+.matrixText {
+    font-size: 20px;
+}
+
+
+
+
+.matrixCell {
+    width: 45px;
 }

@@ -15,13 +15,13 @@
 
         <form action = "http://localhost:5000/detresult" method = "POST">
 
-        <table border="1%">
+        <table class="matrix">
             {% for i in range(0, dim) %}
 
                 <tr>
 
                 {% for j in range(0, dim) %}
-                    <td>
+                    <td class="matrixCell">
                         <input class="matrixentry" type="text" name="num[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
                     </td>
                 {% endfor %}
@@ -37,13 +37,54 @@
 
         <input type="submit" value="submit">
 
+        <br>
+        <br>
+        <br>
+
         </form>
     {% endif %}
 
     {% if detstr != null %}
-        <p>Determinant = {{ detstr }} </p>
+
+        <div>
+
+            <table class="matrixDet">
+                {% for i in range(0, dim) %}
+
+                    <tr>
+                        {% for j in range(0, dim) %}
+                            <td class="matrixText">
+                                {{ matrix[i][j] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+
+                {% endfor %}
+            </table>
+        </div>
+
+        <div style="margin-left: 2%; vertical-align: center;">
+
+            {% for i in range(0, dim) %}
+                <br>
+            {% endfor %}
+
+            =
+        </div>
+
+        <div class="display">
+
+            {% for i in range(0, dim) %}
+                <br>
+            {% endfor %}
+
+            {{ detstr }}
+        </div>
     {% endif %}
 
+
+    <!--Matrix multiplication-->
 
     {% if choice == 'matmul' %}
         <h3>Matrix Multiplication Calculator</h3>
@@ -51,18 +92,22 @@
 
         <form action = "http://localhost:5000/matmulresult" method = "POST">
 
-            <div style="margin-right: 10%;">
+
+
+
+
+            <div class="childDiv">
                 Matrix One:
 
                 <br>
 
-                <table border="1%">
+                <table class="matrix">
                     {% for i in range(0, m1_1) %}
 
                         <tr>
 
                         {% for j in range(0, m1_2) %}
-                            <td>
+                            <td class="matrixCell">
                                 <input class="matrixentry" type="text" name="matrixOne[{{ i }}][{{ j }}]" {% if matrixOneString != null %}  value="{{ matrixOneString[i][j] }}" {% endif %} >
                             </td>
                         {% endfor %}
@@ -74,18 +119,18 @@
             </div>
 
 
-            <div>
+            <div class="childDiv">
                 Matrix Two:
 
                 <br>
 
-                <table border="1%">
+                <table class="matrix">
                     {% for i in range(0, m2_1) %}
 
                         <tr>
 
                         {% for j in range(0, m2_2) %}
-                            <td>
+                            <td class="matrixCell">
                                 <input class="matrixentry" type="text" name="matrixTwo[{{ i }}][{{ j }}]" {% if matrixTwoString != null %}  value="{{ matrixTwoString[i][j] }}" {% endif %} >
                             </td>
                         {% endfor %}
@@ -97,44 +142,93 @@
             </div>
 
 
+
             <br clear="all">
             <br>
 
+
             <input type="submit" value="submit">
+
+            <br>
+            <br>
 
         </form>
     {% endif %}
 
     {% if matmulresult != null %}
-        <div>
-            _
 
-            <br>
+        <br>
+
+        <div class="matmuldisplay">
+
+            <table class="matrix">
+                {% for i in range(0, m1_1) %}
+
+                    <tr>
+                        {% for j in range(0, m1_2) %}
+                            <td class="matrixText">
+                                {{ matrixOneString[i][j] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
 
 
-
-            {% for i in range(0, m1_1) %}
-
-                | &nbsp;
+                {% endfor %}
+            </table>
 
 
-                {% for j in range(0, m1_2) %}
+        </div>
 
 
-                    {{ matrixOneString[i][j] }}
+        <div class="matmuldisplay">
 
-                    &nbsp; &nbsp; &nbsp;
+            <table class="matrix">
+
+                {% for i in range(0, m2_1) %}
+
+                    <tr>
+                        {% for j in range(0, m2_2) %}
+                            <td class="matrixText">
+                                {{ matrixTwoString[i][j] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
 
                 {% endfor %}
 
-                |
-
-                <br>
-            {% endfor %}
-
-            _
-
+            </table>
         </div>
+
+
+        <div class="display">
+            <p>=</p>
+        </div>
+
+        <div class="matmuldisplay" style="margin-right: 2%;">
+
+
+            <table class="matrix">
+
+                {% for i in range(0, m1_1) %}
+
+                    <tr>
+                        {% for j in range(0, m2_2) %}
+                            <td class="matrixText">
+                                {{ matmulresult[i][j] }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+        </div>
+
+
+
+
+
+
     {% endif %}
 
 

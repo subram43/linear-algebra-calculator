@@ -61,10 +61,10 @@ def matmulresult():
 
                             input = intvalue(input)
 
-                            if np.abs(np.ceil(input) - input) < 0.000000000001:
+                            if np.abs(np.ceil(float(input)) - float(input)) < 0.000000000001:
                                 input = np.ceil(input)
-                            elif np.abs(input - np.floor(input) < 0.000000000001):
-                                input = np.floor(input)
+                            elif np.abs(float(input) - np.floor(float(input)) < 0.000000000001):
+                                input = np.floor(float(input))
 
                             row.append(float(input))
                     else:
@@ -136,6 +136,7 @@ def matmulresult():
 
 
         matmulresult = np.matmul(matrixOne, matrixTwo)
+
 
 
         return render_template('form.html', choice="matmul", matmulresult=matmulresult, matrixOneString=matrixOneString, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
