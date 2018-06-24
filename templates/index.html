@@ -29,6 +29,7 @@
                 <option value="det" {% if selected == 0 %} selected="selected"  {% endif %}  {% if selected != -1 and selected != 0 %} disabled {% endif %}>determinant</option>
                 <option value="matmul" {% if selected == 1 %} selected="selected" {% endif %} {% if selected != -1 and selected != 1 %} disabled {% endif %}>matrix multiply</option>
                 <option value="eig" {% if selected == 2 %} selected="selected" {% endif %}  {% if selected != -1 and selected != 2 %} disabled {% endif %}> eigenvectors</option>
+                <option value="inv" {% if selected == 3 %} selected="selected" {% endif %} {% if selected != -1 and selected != 3 %} disabled  {% endif %}>inverse of matrix</option>
             </select>
 
             <br>
@@ -203,6 +204,39 @@
 
 
                 <br><br>
+
+
+                <input type="submit" value="submit">
+            </form>
+        {% endif %}
+
+        {% if res == 'inv' %}
+            <form action = "http://localhost:5000/invform" method="POST">
+                Choose the dimension of your matrix:
+
+                <select name="invdim">
+
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                </select>
 
 
                 <input type="submit" value="submit">

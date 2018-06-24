@@ -2,12 +2,14 @@ from flask import Flask, render_template, request
 from scipy import linalg
 from Determinant import determinant
 from MatrixMultiply import matmul
+from Inverse import inverse
 import numpy as np
 import re
 
 application = Flask(__name__)
 application.register_blueprint(determinant)
 application.register_blueprint(matmul)
+application.register_blueprint(inverse)
 
 @application.route("/")
 def index():
@@ -31,11 +33,10 @@ def dimensions():
         elif res == 'eig':
             selected = 2
 
+        elif res == 'inv':
+            selected = 3
+
         return render_template("index.html", res=res, selected=selected)
-
-
-
-
 
 @application.after_request
 def clear_cache(req):
@@ -45,8 +46,6 @@ def clear_cache(req):
     req.headers["Expires"] = "0"
     req.headers["Cache-Control"] = "public, max-age=0"
     return req
-
-
 
 
 if __name__ == '__main__':

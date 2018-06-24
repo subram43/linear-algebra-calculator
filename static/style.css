@@ -33,6 +33,10 @@ div.matmuldisplay {
     margin-bottom: 27px;
 }
 
+div.inversesup {
+    margin-left: 1%;
+}
+
 div.childDiv {
     margin-right: 5%;
     display: inline-block;

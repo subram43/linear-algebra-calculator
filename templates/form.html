@@ -155,9 +155,10 @@
         </form>
     {% endif %}
 
-    {% if matmulresult != null %}
+    {% if matmulresult != null or columnvector != null %}
 
         <br>
+
 
         <div class="matmuldisplay">
 
@@ -175,8 +176,6 @@
 
                 {% endfor %}
             </table>
-
-
         </div>
 
 
@@ -225,10 +224,87 @@
         </div>
 
 
+    {% endif %}
 
 
 
+    {% if choice == 'inv' %}
+        <h3>Matrix Inverse Calculator</h3>
 
+        <form action="http://localhost:5000/invresult" method="POST">
+
+            <table class="matrix">
+                {% for i in range(0, dim) %}
+
+                    <tr>
+
+                    {% for j in range(0, dim) %}
+                        <td class="matrixCell">
+                            <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrixString != null %}  value="{{ matrixString[i][j] }}" {% endif %} >
+                        </td>
+                    {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+            <br>
+            <br>
+
+            <input type="submit" value="submit">
+
+            <br>
+            <br>
+            <br>
+
+        </form>
+    {% endif %}
+
+
+    {% if inv != null %}
+        <div>
+            <table class="matrix">
+                {% for i in range(0, dim) %}
+                    <tr>
+                        {% for j in range(0, dim) %}
+                            <td class="matrixText">{{ matrixString[i][j] }}</td>
+                        {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </div>
+
+        <div class="inversesup">-1</div>
+
+        <div class="display">
+            {% for i in range(0, dim) %}
+                <br>
+            {% endfor %}
+            =
+        </div>
+
+        <div class="display">
+            <table class="matrix">
+                {% for i in range(0, dim) %}
+                    <tr>
+                        {% for j in range(0, dim) %}
+                            <td class="matrixText">{{ inv[i][j] }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    {% endif %}
+
+    {% if singular != null %}
+        <h1 class="error">{{ error }}</h1>
+
+        <p>{{ message }}</p>
     {% endif %}
 
 

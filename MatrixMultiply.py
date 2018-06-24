@@ -137,6 +137,8 @@ def matmulresult():
 
         matmulresult = np.matmul(matrixOne, matrixTwo)
 
+        if m2d2 == 1:
+            return render_template('form.html', choice="matmul", columnvector="true", matmulresult=matmulresult, matrixOneString=matrixOneString, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
 
 
         return render_template('form.html', choice="matmul", matmulresult=matmulresult, matrixOneString=matrixOneString, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
