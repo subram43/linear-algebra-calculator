@@ -309,6 +309,92 @@
     {% endif %}
 
 
+    <!-- RREF calculator-->
+
+    {% if choice == 'rref' %}
+        <h3>RREF Calculator</h3>
+
+        <form action="http://localhost:5000/rrefresult" method="POST">
+
+            <table class="matrix">
+                {% for i in range(0, dim1) %}
+
+                    <tr>
+
+                    {% for j in range(0, dim2) %}
+                        <td class="matrixCell">
+                            <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrix_string != null %}  value="{{ matrix_string[i][j] }}" {% endif %} >
+                        </td>
+                    {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+            <br>
+            <br>
+
+            <input type="submit" value="submit">
+
+            <br>
+            <br>
+            <br>
+
+        </form>
+
+
+    {% endif %}
+
+    {% if rref != null %}
+
+        <div>
+            {% for i in range(0, dim1) %}
+                <br>
+            {% endfor %}
+
+            RREF of
+        </div>
+
+        <div class="display">
+            <table class="matrix">
+                {% for i in range(0, dim1) %}
+                    <tr>
+                        {% for j in range(0, dim2) %}
+                            <td class="matrixText">{{ matrix_string[i][j] }}</td>
+                        {% endfor %}
+
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        </div>
+
+        <div class="display">
+            {% for i in range(0, dim1) %}
+                <br>
+            {% endfor %}
+            =
+        </div>
+
+        <div class="display">
+            <table class="matrix">
+                {% for i in range(0, dim1) %}
+                    <tr>
+                        {% for j in range(0, dim2) %}
+                            <td class="matrixText">{{ rref[i][j] }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+
+    {% endif %}
+
+
 
     <!--Eigenspace Calculator-->
 

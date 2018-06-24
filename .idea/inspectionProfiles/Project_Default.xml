@@ -32,6 +32,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="typing.Iterable.__getitem__" />
+          <option value="float.*" />
         </list>
       </option>
     </inspection_tool>

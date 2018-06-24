@@ -131,6 +131,9 @@
             </form>
         {% endif %}
 
+
+        <!--RREF calculator-->
+
         {% if res == 'rref' %}
             <form action="http://localhost:5000/rrefform" method="POST">
                 Choose the dimensions of your matrix:
@@ -149,6 +152,13 @@
                 <input type="submit" value="submit">
             </form>
         {% endif %}
+
+
+
+
+
+
+
 
         {% if res == 'eig' %}
             <form action="http://localhost:5000/eigform" method="POST">

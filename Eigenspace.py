@@ -12,7 +12,6 @@ eigenspace = Blueprint('eigenspace', __name__)
 def eigform():
     if request.method == 'POST':
         dim = int(request.form.get('eigdim'))
-        render_template('index.html')
 
         choice = 'eig'
 
@@ -62,8 +61,24 @@ def eigresult():
 
         matrix = np.array(matrix_list)
 
-        eig = linalg.eig(matrix)
+        eigvaluesraw, eigvectorsraw = linalg.eig(matrix)
+
+        eigvalues = []
+
+        for i in range(0, len(eigvaluesraw)):
+            if eigvaluesraw[i].imag == 0:
+                num = eigvaluesraw[i].real
+
+                if np.abs(np.ceil(float(num)) - float(num)) < 0.000000000001:
+                    num = np.ceil(num)
+                elif np.abs(float(num) - np.floor(float(num)) < 0.000000000001):
+                    num = np.floor(float(num))
+
+                eigvalues.append(num)
+            else:
+                eigvalues.append(eigvaluesraw[i])
 
 
-        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenspace=eig, dim=dim)
+
+        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigvalues, eigenspace=eigvectorsraw, dim=dim)
 
