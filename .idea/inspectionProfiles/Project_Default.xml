@@ -33,6 +33,7 @@
         <list>
           <option value="typing.Iterable.__getitem__" />
           <option value="float.*" />
+          <option value="scipy.sparse" />
         </list>
       </option>
     </inspection_tool>

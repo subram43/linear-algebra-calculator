@@ -470,9 +470,35 @@
         <br>
         <br>
 
-        <div class="display">
-            &lambda;
-        </div>
+        <!--<div class="display">-->
+         <!---->
+
+
+        <!--</div>-->
+
+
+        {% for i in range(0, num_eigenvalues) %}
+            <div class="display" style="font-size: 20px;">
+                &lambda; = {{ eigenvalues[i] }}
+
+                <br><br>
+
+                {% for j in range(0, eigenspace[i]|length) %}
+                    <div class="display">
+                        <table class="matrix">
+                            {% for k in range(0, eigenspace[i][j]|length) %}
+                                <tr>
+                                    <td class="matrixText">{{ eigenspace[i][j][k] }}</td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        {% endfor %}
 
     {% endif %}
 

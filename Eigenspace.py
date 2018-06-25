@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, Blueprint
 from scipy import linalg
-from Functions import intvalue
 import numpy as np
-import re
+from scipy.sparse.linalg import eigs
+
+from Functions import intvalue
+import fractions, re, collections
 
 
 eigenspace = Blueprint('eigenspace', __name__)
@@ -63,22 +65,26 @@ def eigresult():
 
         eigvaluesraw, eigvectorsraw = linalg.eig(matrix)
 
-        eigvalues = []
+        eigvaluesraw = np.array(eigvaluesraw).tolist()
+
 
         for i in range(0, len(eigvaluesraw)):
-            if eigvaluesraw[i].imag == 0:
-                num = eigvaluesraw[i].real
-
-                if np.abs(np.ceil(float(num)) - float(num)) < 0.000000000001:
-                    num = np.ceil(num)
-                elif np.abs(float(num) - np.floor(float(num)) < 0.000000000001):
-                    num = np.floor(float(num))
-
-                eigvalues.append(num)
+            if eigvaluesraw[i].imag != 0:
+                render_template('error.html', error="Value Error", message="You entered invalid values")
             else:
-                eigvalues.append(eigvaluesraw[i])
+                eigvaluesraw[i] = fractions.Fraction(eigvaluesraw[i].real).limit_denominator()
 
+        multiplicities = collections.Counter(eigvaluesraw)
 
+        eigenvalues = list(multiplicities.keys())
 
-        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigvalues, eigenspace=eigvectorsraw, dim=dim)
+        h = eigenvalues[0]
+        num_eigenvalues = len(eigenvalues)
+
+        eigenvectors = []
+
+        for i in range(0, len(eigenvalues)):
+            eigenvectors.append(list(eigs(matrix, k=eigenvalues[i])))
+
+        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigenvalues, eigenspace=eigenvectors, dim=dim, num_eigenvalues=num_eigenvalues)
 

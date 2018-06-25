@@ -46,6 +46,7 @@ div.childDiv {
 
 .matrix {
     position: relative;
+    margin-bottom: 20px;
 }
 
 .matrix:before, .matrix:after {
