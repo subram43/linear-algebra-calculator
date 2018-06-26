@@ -79,7 +79,11 @@
                 <br>
             {% endfor %}
 
-            {{ detstr }}
+            {% if detstr.denominator == 1 %}
+                {{ detstr }}
+            {% else %}
+                <sup>{{ detstr.numerator }}</sup>&frasl;<sub>{{ detstr.denominator }}</sub>
+            {% endif %}
         </div>
     {% endif %}
 
@@ -213,7 +217,11 @@
                     <tr>
                         {% for j in range(0, m2_2) %}
                             <td class="matrixText">
-                                {{ matmulresult[i][j] }}
+                                {% if matmulresult[i][j].denominator == 1 %}
+                                    {{ matmulresult[i][j] }}
+                                {% else %}
+                                    <sup>{{ matmulresult[i][j].numerator }}</sup>&frasl;<sub>{{ matmulresult[i][j].denominator }}</sub>
+                                {% endif %}
                             </td>
                         {% endfor %}
                     </tr>
@@ -293,7 +301,13 @@
                 {% for i in range(0, dim) %}
                     <tr>
                         {% for j in range(0, dim) %}
-                            <td class="matrixText">{{ inv[i][j] }}</td>
+                            <td class="matrixText">
+                                {% if inv[i][j].denominator == 1 %}
+                                    {{ inv[i][j] }}
+                                {% else %}
+                                    <sup>{{ inv[i][j].numerator }}</sup>&frasl;<sub>{{ inv[i][j].denominator }}</sub>
+                                {% endif %}
+                            </td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
@@ -383,7 +397,16 @@
                 {% for i in range(0, dim1) %}
                     <tr>
                         {% for j in range(0, dim2) %}
-                            <td class="matrixText">{{ rref[i][j] }}</td>
+
+                            {% if rref[i][j].denominator == 1 %}
+                                <td class="matrixText">{{ rref[i][j] }}</td>
+                            {% else %}
+                                <td class="matrixText">
+                                    <sup>{{ rref[i][j].numerator }}</sup>&frasl;<sub>{{ rref[i][j].denominator }}</sub>
+                                </td>
+                            {% endif %}
+
+
                         {% endfor %}
                     </tr>
                 {% endfor %}
@@ -483,19 +506,25 @@
 
                 <br><br>
 
-                {% for j in range(0, eigenspace[i]|length) %}
-                    <div class="display">
-                        <table class="matrix">
-                            {% for k in range(0, eigenspace[i][j]|length) %}
-                                <tr>
-                                    <td class="matrixText">{{ eigenspace[i][j][k] }}</td>
-                                </tr>
+                <table class="matrix">
+                    {% for j in range(0, eigenspace[i]|length) %}
 
-                            {% endfor %}
-                        </table>
 
-                    </div>
-                {% endfor %}
+                        <tr>
+                            {% if eigenspace[i][j].denominator == 1 %}
+                                <td class="matrixText">{{ eigenspace[i][j] }}</td>
+                            {% else %}
+                                <td class="matrixText">
+                                    <sup>{{ eigenspace[i][j].numerator }}</sup>&frasl;<sub>{{ eigenspace[i][j].denominator }}</sub>
+                                </td>
+                            {% endif %}
+
+                        </tr>
+
+                    {% endfor %}
+                </table>
+
+
 
             </div>
         {% endfor %}

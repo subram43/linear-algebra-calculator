@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Blueprint
 from scipy import linalg
 from Functions import intvalue
+import fractions
 import numpy as np
 import re
 
@@ -69,7 +70,7 @@ def detResult():
         elif np.abs(det - np.floor(det) < 0.000000000001):
             det = np.floor(det)
 
-        detstr = str(det)
+        detstr = fractions.Fraction(det).limit_denominator()
 
         return render_template('form.html', choice="det", matrix=matrix_string, detstr=detstr, dim=dim)
 

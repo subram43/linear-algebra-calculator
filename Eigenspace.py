@@ -63,28 +63,32 @@ def eigresult():
 
         matrix = np.array(matrix_list)
 
-        eigvaluesraw, eigvectorsraw = linalg.eig(matrix)
+        eigvaluesraw, eigvectorsraw = np.linalg.eig(matrix)
 
-        eigvaluesraw = np.array(eigvaluesraw).tolist()
+        eigenvalues = np.array(eigvaluesraw).tolist()
+        eigenvectors = np.array(eigvectorsraw).tolist()
 
 
-        for i in range(0, len(eigvaluesraw)):
-            if eigvaluesraw[i].imag != 0:
-                render_template('error.html', error="Value Error", message="You entered invalid values")
-            else:
-                eigvaluesraw[i] = fractions.Fraction(eigvaluesraw[i].real).limit_denominator()
 
-        multiplicities = collections.Counter(eigvaluesraw)
-
-        eigenvalues = list(multiplicities.keys())
-
-        h = eigenvalues[0]
-        num_eigenvalues = len(eigenvalues)
-
-        eigenvectors = []
 
         for i in range(0, len(eigenvalues)):
-            eigenvectors.append(list(eigs(matrix, k=eigenvalues[i])))
+            if eigenvalues[i].imag != 0:
+                render_template('error.html', error="Value Error", message="You entered invalid values")
+            else:
+                eigenvalues[i] = fractions.Fraction(eigenvalues[i].real).limit_denominator()
 
-        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigenvalues, eigenspace=eigenvectors, dim=dim, num_eigenvalues=num_eigenvalues)
+
+        for i in range(0, len(eigenvectors)):
+            k=0
+            for j in range(0, len(eigenvectors[i])):
+                eigenvectors[i][j] = fractions.Fraction(eigenvectors[i][j]).limit_denominator()
+
+                if eigenvectors[i][j] != 0 and k==0:
+                    k = fractions.Fraction(numerator=eigenvectors[i][j].denominator, denominator=eigenvectors[i][j].numerator)
+
+            if k != 0:
+                eigenvectors[i] = np.array(eigenvectors[i]) * k
+
+
+        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigenvalues, eigenspace=eigenvectors, dim=dim, num_eigenvalues=len(eigenvalues))
 
