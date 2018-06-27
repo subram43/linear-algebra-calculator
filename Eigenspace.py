@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request, Blueprint
+from flask import render_template, request, Blueprint
 from scipy import linalg
 import numpy as np
-from scipy.sparse.linalg import eigs
-
 from Functions import intvalue
-import fractions, re, collections
+import fractions, re
 
 
 eigenspace = Blueprint('eigenspace', __name__)
@@ -24,7 +22,7 @@ def eigform():
 def eigresult():
     if request.method == 'POST':
 
-        i=0
+        i = 0
 
         while str(request.form.get("matrix[" + str(i) + "][0]")) != 'None':
             i += 1
@@ -63,32 +61,43 @@ def eigresult():
 
         matrix = np.array(matrix_list)
 
-        eigvaluesraw, eigvectorsraw = np.linalg.eig(matrix)
+        eigvaluesraw, eigvectorsraw = linalg.eig(matrix)
+
+        eigvectorsraw = np.transpose(eigvectorsraw)
 
         eigenvalues = np.array(eigvaluesraw).tolist()
-        eigenvectors = np.array(eigvectorsraw).tolist()
+        eigenvectors = np.array(eigvectorsraw, dtype='float64').tolist()
 
 
 
 
-        for i in range(0, len(eigenvalues)):
+
+        for i in range(0, len(list(eigenvalues))):
             if eigenvalues[i].imag != 0:
-                render_template('error.html', error="Value Error", message="You entered invalid values")
+                return render_template('form.html', choice="eig", imaginary="true", dim=dim, matrixString=matrix_string, error="Invalid Matrix", message="The solution to the eigenspace of this matrix is not real")
             else:
                 eigenvalues[i] = fractions.Fraction(eigenvalues[i].real).limit_denominator()
 
 
-        for i in range(0, len(eigenvectors)):
-            k=0
+        for i in range(0, len(list(eigenvectors))):
+            k = 0
             for j in range(0, len(eigenvectors[i])):
                 eigenvectors[i][j] = fractions.Fraction(eigenvectors[i][j]).limit_denominator()
 
-                if eigenvectors[i][j] != 0 and k==0:
-                    k = fractions.Fraction(numerator=eigenvectors[i][j].denominator, denominator=eigenvectors[i][j].numerator)
+
+
+                if eigenvectors[i][j] != 0:
+                    k = fractions.Fraction(numerator=eigenvectors[i][j].denominator, denominator=eigenvectors[i][j].numerator).limit_denominator()
 
             if k != 0:
                 eigenvectors[i] = np.array(eigenvectors[i]) * k
 
+                for j in range(0, len(eigenvectors[i])):
+                    if eigenvectors[i][j].denominator > 10000000:
+                        eigenvectors[i][j] = fractions.Fraction(eigenvectors[i][j].numerator / eigenvectors[i][j].denominator).limit_denominator(100)
 
-        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigenvalues, eigenspace=eigenvectors, dim=dim, num_eigenvalues=len(eigenvalues))
 
+
+
+
+        return render_template('form.html', choice="eig", matrixString=matrix_string, eigenvalues=eigenvalues, eigenspace=eigenvectors, dim=dim, num_eigenvalues=len(list(eigenvalues)))

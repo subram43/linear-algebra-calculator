@@ -64,27 +64,23 @@
             </table>
         </div>
 
-        <div style="margin-left: 2%; vertical-align: center;">
+        <div class="display" style="margin-left: 2%; vertical-align: center; font-size: 20px;">
 
-            {% for i in range(0, dim) %}
+            {% for i in range(0, dim-1) %}
                 <br>
             {% endfor %}
 
-            =
-        </div>
+            = &nbsp;
 
-        <div class="display">
-
-            {% for i in range(0, dim) %}
-                <br>
-            {% endfor %}
 
             {% if detstr.denominator == 1 %}
                 {{ detstr }}
             {% else %}
                 <sup>{{ detstr.numerator }}</sup>&frasl;<sub>{{ detstr.denominator }}</sub>
             {% endif %}
+
         </div>
+
     {% endif %}
 
 
@@ -493,11 +489,6 @@
         <br>
         <br>
 
-        <!--<div class="display">-->
-         <!---->
-
-
-        <!--</div>-->
 
 
         {% for i in range(0, num_eigenvalues) %}
@@ -529,6 +520,12 @@
             </div>
         {% endfor %}
 
+    {% endif %}
+
+    {% if imaginary != null %}
+        <h1 class="error">{{ error }}</h1>
+
+        <p>{{ message }}</p>
     {% endif %}
 
 

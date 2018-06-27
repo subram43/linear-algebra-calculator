@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, Blueprint
-from scipy import linalg
+from flask import render_template, request, Blueprint
 from Functions import intvalue
 import numpy as np
 import fractions
@@ -23,7 +22,7 @@ def invform():
 def invresult():
     if request.method == 'POST':
 
-        i=0
+        i = 0
 
         while str(request.form.get("matrix[" + str(i) + "][0]")) != 'None':
             i += 1

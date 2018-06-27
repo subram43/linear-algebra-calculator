@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, Blueprint
-from scipy import linalg
+from flask import render_template, request, Blueprint
 from Functions import intvalue
 import numpy as np
 import fractions

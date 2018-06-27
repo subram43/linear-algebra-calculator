@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Blueprint
+from flask import render_template, request, Blueprint
 from scipy import linalg
 from Functions import intvalue
 import fractions
@@ -10,7 +10,7 @@ determinant = Blueprint('determinant', __name__)
 
 
 @determinant.route("/detform", methods=['POST'])
-def detForm():
+def detform():
     if request.method == 'POST':
         dim = int(request.form.get('detdim'))
 
@@ -20,10 +20,10 @@ def detForm():
 
 
 @determinant.route("/detresult", methods=['POST'])
-def detResult():
+def detresult():
     if request.method == 'POST':
 
-        i=0
+        i = 0
 
         while str(request.form.get("num[" + str(i) + "][0]")) != 'None':
             i += 1

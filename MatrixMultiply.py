@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, Blueprint
-from scipy import linalg
+from flask import render_template, request, Blueprint
 from Functions import intvalue
 import fractions
 import numpy as np
@@ -25,7 +24,7 @@ def matmulresult():
 
     if request.method == 'POST':
 
-        i=0; j=0
+        i = 0; j = 0
 
         while str(request.form.get("matrixOne[" + str(i) + "][0]")) != 'None':
             i += 1
@@ -33,7 +32,7 @@ def matmulresult():
         m1d1 = i
 
         while str(request.form.get("matrixOne[0][" + str(j) + "]")) != 'None':
-            j+= 1
+            j += 1
 
         m1d2 = j
 
@@ -92,8 +91,8 @@ def matmulresult():
 
         m2d2 = j
 
-        matrixTwoList = []
-        matrixTwoString = []
+        matrix_two_list = []
+        matrix_two_string = []
 
         for i in range(0, m2d1):
             row = []
@@ -123,16 +122,16 @@ def matmulresult():
                         srow.append(input)
 
                         row.append(float(input))
-                except:
+                except ValueError:
                     return render_template('error.html', error="Value Error", message="You entered invalid values")
 
 
-            matrixTwoString.append(srow)
-            matrixTwoList.append(row)
+            matrix_two_string.append(srow)
+            matrix_two_list.append(row)
 
 
         matrix_one = np.array(matrix_one_list)
-        matrix_two = np.array(matrixTwoList)
+        matrix_two = np.array(matrix_two_list)
 
 
         matmulresult = np.matmul(matrix_one, matrix_two)
@@ -148,7 +147,7 @@ def matmulresult():
 
 
         if m2d2 == 1:
-            return render_template('form.html', choice="matmul", columnvector="true", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
+            return render_template('form.html', choice="matmul", columnvector="true", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrix_two_string, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
 
 
-        return render_template('form.html', choice="matmul", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrixTwoString, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
+        return render_template('form.html', choice="matmul", matmulresult=matmulresult, matrixOneString=matrix_one_string, matrixTwoString=matrix_two_string, m1_1=m1d1, m1_2=m1d2, m2_1=m2d1, m2_2=m2d2)
