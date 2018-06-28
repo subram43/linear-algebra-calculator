@@ -15,32 +15,39 @@
 
         <form action = "http://localhost:5000/detresult" method = "POST">
 
-        <table class="matrix">
-            {% for i in range(0, dim) %}
+            <table class="matrix">
+                {% for i in range(0, dim) %}
 
-                <tr>
+                    <tr>
 
-                {% for j in range(0, dim) %}
-                    <td class="matrixCell">
-                        <input class="matrixentry" type="text" name="num[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
-                    </td>
+                    {% for j in range(0, dim) %}
+                        <td class="matrixCell">
+                            <input class="matrixentry" type="text" name="num[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
+                        </td>
+                    {% endfor %}
+
+                    </tr>
+
                 {% endfor %}
-
-                </tr>
-
-            {% endfor %}
-        </table>
+            </table>
 
 
-        <br>
-        <br>
+            <br>
+            <br>
 
-        <input type="submit" value="submit">
+            <input class="button" type="submit" value="submit">
 
-        <br>
-        <br>
-        <br>
 
+
+        </form>
+
+        <form class="reset" action="http://localhost:5000/">
+
+            <input class="button" type="submit" value="home">
+
+            <br>
+            <br>
+            <br>
         </form>
     {% endif %}
 
@@ -147,11 +154,17 @@
             <br>
 
 
-            <input type="submit" value="submit">
+            <input class="button" type="submit" value="submit">
+
+
+        </form>
+
+        <form class="reset" action="http://localhost:5000/">
+
+            <input class="button" type="submit" value="home">
 
             <br>
             <br>
-
         </form>
     {% endif %}
 
@@ -257,13 +270,19 @@
             <br>
             <br>
 
-            <input type="submit" value="submit">
-
-            <br>
-            <br>
-            <br>
-
+            <input class="button" type="submit" value="submit">
         </form>
+
+        <form class="reset" action="http://localhost:5000/">
+
+            <input class="button" type="submit" value="home">
+
+            <br>
+            <br>
+            <br>
+        </form>
+
+
     {% endif %}
 
 
@@ -345,12 +364,17 @@
             <br>
             <br>
 
-            <input type="submit" value="submit">
+            <input class="button" type="submit" value="submit">
+
+        </form>
+
+        <form class="reset" action="http://localhost:5000/">
+
+            <input class="button" type="submit" value="home">
 
             <br>
             <br>
             <br>
-
         </form>
 
 
@@ -418,7 +442,12 @@
     <!--Eigenspace Calculator-->
 
     {% if choice == 'eig' %}
-        <h3>Eigenspace Calculator</h3>
+        <h2>Eigenspace Calculator</h2>
+
+        <p style="color: red;">
+            **Warning: Due to the fact that eigenbasis isn't unique, this program may produce different eigenvectors than what you may expect. Because of this, the result you get here may not match the result you may get by
+            hand. If you want a fully simplified version, you may need to put the eigenvectors into the RREF Calculator to retrieve the fully simplified form
+        </p>
 
         <form action="http://localhost:5000/eigresult" method="POST">
 
@@ -441,12 +470,16 @@
             <br>
             <br>
 
-            <input type="submit" value="submit">
+            <input class="button" type="submit" value="submit">
+        </form>
+
+        <form class="reset" action="http://localhost:5000/">
+
+            <input class="button" type="submit" value="home">
 
             <br>
             <br>
             <br>
-
         </form>
 
 
@@ -492,7 +525,7 @@
 
 
         {% for i in range(0, num_eigenvalues) %}
-            <div class="display" style="font-size: 20px;">
+            <div class="display" style="font-size: 20px; margin-bottom: 10px;">
                 &lambda; = {{ eigenvalues[i] }}
 
                 <br><br>

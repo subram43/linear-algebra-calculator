@@ -2,8 +2,31 @@ h1 {
     color: deeppink;
 }
 
+h1.title {
+    font-family: Chalkduster, sans-serif;
+    font-size: 50px;
+}
+
 body {
+    margin-top: 2px;
     margin-left: 2%;
+    background: greenyellow url("home_background_2.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+form {
+    display: inline;
+}
+
+select {
+    font-size: 15px;
+}
+
+input.button {
+    font-size: 16px;
 }
 
 input.matrixentry {
@@ -42,6 +65,18 @@ div.childDiv {
     display: inline-block;
     margin-bottom: 10px;
 
+}
+
+div.container {
+    margin-left: 6%;
+    width: 88%;
+    margin-bottom: 200px;
+}
+
+div.body {
+    margin-left: 8%;
+    margin-right: 10%;
+    font-size: 22px;
 }
 
 .matrix {
