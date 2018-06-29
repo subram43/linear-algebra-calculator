@@ -61,7 +61,7 @@ def invresult():
                         srow.append(input)
                         row.append(float(input))
                 except ValueError:
-                    return render_template('error.html', error="Value Error", message="You entered invalid values")
+                    return render_template('form.html', value_error="True", error="Value Error", message="You entered invalid values")
 
             matrix_string.append(srow)
             matrix_list.append(row)
@@ -82,6 +82,6 @@ def invresult():
 
 
         except np.linalg.LinAlgError:
-            return render_template('form.html', choice="inv", dim=dim, matrixString=matrix_string, singular="true", error="Matrix Error", message="The matrix you entered is singular, so the inverse cannot be found")
+            return render_template('form.html', choice="inv", dim=dim, matrixString=matrix_string, singular="true", error="Singular Matrix", message="The matrix you entered is singular, so the inverse does not exist!")
 
         return render_template('form.html', choice="inv", matrixString=matrix_string, inv=inv, dim=dim)

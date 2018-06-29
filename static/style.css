@@ -2,6 +2,10 @@ h1 {
     color: deeppink;
 }
 
+h2 {
+    font-size: 32px;
+}
+
 h1.title {
     font-family: Chalkduster, sans-serif;
     font-size: 50px;
@@ -42,6 +46,13 @@ h1.error {
     color: red;
 }
 
+p.description {
+    font-size: 20px;
+}
+
+p.error_message {
+    font-size: 20px;
+}
 
 div {
     float: left;
@@ -76,7 +87,14 @@ div.container {
 div.body {
     margin-left: 8%;
     margin-right: 10%;
+    width: available;
     font-size: 22px;
+}
+
+div.bodyForm {
+    margin-left: 8%;
+    margin-right: 10%;
+    float: none;
 }
 
 .matrix {

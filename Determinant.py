@@ -56,7 +56,7 @@ def detresult():
                         row.append(float(input))
 
                 except ValueError:
-                    return render_template('error.html', error="Value Error", message="You entered invalid values")
+                    return render_template('form.html', value_error="True", error="Value Error", message="You entered invalid values")
 
             matrix_string.append(srow)
             matrix_list.append(row)

@@ -9,560 +9,589 @@
 </head>
 <body>
 
-    {% if choice == 'det' %}
+    <div class="container">
 
-        <h3>Determinant Calculator</h3>
+        <h1 class="title">Linear AlgebrA+</h1>
 
-        <form action = "http://localhost:5000/detresult" method = "POST">
-
-            <table class="matrix">
-                {% for i in range(0, dim) %}
-
-                    <tr>
-
-                    {% for j in range(0, dim) %}
-                        <td class="matrixCell">
-                            <input class="matrixentry" type="text" name="num[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
-                        </td>
-                    {% endfor %}
-
-                    </tr>
-
-                {% endfor %}
-            </table>
-
-
-            <br>
-            <br>
-
-            <input class="button" type="submit" value="submit">
+        <div class="bodyForm">
 
 
 
-        </form>
+            {% if choice == 'det' %}
 
-        <form class="reset" action="http://localhost:5000/">
 
-            <input class="button" type="submit" value="home">
+                <h2>Determinant Calculator</h2>
 
-            <br>
-            <br>
-            <br>
-        </form>
-    {% endif %}
+                <p class="description">Please fill in the entries below with the corresponding elements of the {{ dim }} by {{ dim }} matrix. Click "submit" to calculate the determinant of the provided matrix.</p>
 
-    {% if detstr != null %}
+                <form action = "http://localhost:5000/detresult" method = "POST">
 
-        <div>
+                    <table class="matrix">
+                        {% for i in range(0, dim) %}
 
-            <table class="matrixDet">
-                {% for i in range(0, dim) %}
+                            <tr>
 
-                    <tr>
-                        {% for j in range(0, dim) %}
-                            <td class="matrixText">
-                                {{ matrix[i][j] }}
-                            </td>
+                            {% for j in range(0, dim) %}
+                                <td class="matrixCell">
+                                    <input class="matrixentry" type="text" name="num[{{ i }}][{{ j }}]" {% if matrix != null %}  value="{{ matrix[i][j] }}" {% endif %} >
+                                </td>
+                            {% endfor %}
+
+                            </tr>
+
                         {% endfor %}
-                    </tr>
+                    </table>
 
 
-                {% endfor %}
-            </table>
-        </div>
+                    <br>
+                    <br>
 
-        <div class="display" style="margin-left: 2%; vertical-align: center; font-size: 20px;">
-
-            {% for i in range(0, dim-1) %}
-                <br>
-            {% endfor %}
-
-            = &nbsp;
+                    <input class="button" type="submit" value="submit">
 
 
-            {% if detstr.denominator == 1 %}
-                {{ detstr }}
-            {% else %}
-                <sup>{{ detstr.numerator }}</sup>&frasl;<sub>{{ detstr.denominator }}</sub>
+
+                </form>
+
+                <form class="reset" action="http://localhost:5000/">
+
+                    <input class="button" type="submit" value="home">
+
+                    <br>
+                    <br>
+                    <br>
+                </form>
             {% endif %}
 
-        </div>
+            {% if detstr != null %}
 
-    {% endif %}
+                <div>
+
+                    <table class="matrixDet">
+                        {% for i in range(0, dim) %}
+
+                            <tr>
+                                {% for j in range(0, dim) %}
+                                    <td class="matrixText">
+                                        {{ matrix[i][j] }}
+                                    </td>
+                                {% endfor %}
+                            </tr>
 
 
-    <!--Matrix multiplication-->
-
-    {% if choice == 'matmul' %}
-        <h3>Matrix Multiplication Calculator</h3>
-
-
-        <form action = "http://localhost:5000/matmulresult" method = "POST">
-
-
-
-
-
-            <div class="childDiv">
-                Matrix One:
-
-                <br>
-
-                <table class="matrix">
-                    {% for i in range(0, m1_1) %}
-
-                        <tr>
-
-                        {% for j in range(0, m1_2) %}
-                            <td class="matrixCell">
-                                <input class="matrixentry" type="text" name="matrixOne[{{ i }}][{{ j }}]" {% if matrixOneString != null %}  value="{{ matrixOneString[i][j] }}" {% endif %} >
-                            </td>
                         {% endfor %}
+                    </table>
+                </div>
 
-                        </tr>
+                <div class="display" style="margin-left: 2%; vertical-align: center; font-size: 20px;">
 
-                    {% endfor %}
-                </table>
-            </div>
-
-
-            <div class="childDiv">
-                Matrix Two:
-
-                <br>
-
-                <table class="matrix">
-                    {% for i in range(0, m2_1) %}
-
-                        <tr>
-
-                        {% for j in range(0, m2_2) %}
-                            <td class="matrixCell">
-                                <input class="matrixentry" type="text" name="matrixTwo[{{ i }}][{{ j }}]" {% if matrixTwoString != null %}  value="{{ matrixTwoString[i][j] }}" {% endif %} >
-                            </td>
-                        {% endfor %}
-
-                        </tr>
-
-                    {% endfor %}
-                </table>
-            </div>
-
-
-
-            <br clear="all">
-            <br>
-
-
-            <input class="button" type="submit" value="submit">
-
-
-        </form>
-
-        <form class="reset" action="http://localhost:5000/">
-
-            <input class="button" type="submit" value="home">
-
-            <br>
-            <br>
-        </form>
-    {% endif %}
-
-    {% if matmulresult != null or columnvector != null %}
-
-        <br>
-
-
-        <div class="matmuldisplay">
-
-            <table class="matrix">
-                {% for i in range(0, m1_1) %}
-
-                    <tr>
-                        {% for j in range(0, m1_2) %}
-                            <td class="matrixText">
-                                {{ matrixOneString[i][j] }}
-                            </td>
-                        {% endfor %}
-                    </tr>
-
-
-                {% endfor %}
-            </table>
-        </div>
-
-
-        <div class="matmuldisplay">
-
-            <table class="matrix">
-
-                {% for i in range(0, m2_1) %}
-
-                    <tr>
-                        {% for j in range(0, m2_2) %}
-                            <td class="matrixText">
-                                {{ matrixTwoString[i][j] }}
-                            </td>
-                        {% endfor %}
-                    </tr>
-
-                {% endfor %}
-
-            </table>
-        </div>
-
-
-        <div class="display">
-            <p>=</p>
-        </div>
-
-        <div class="matmuldisplay" style="margin-right: 2%;">
-
-
-            <table class="matrix">
-
-                {% for i in range(0, m1_1) %}
-
-                    <tr>
-                        {% for j in range(0, m2_2) %}
-                            <td class="matrixText">
-                                {% if matmulresult[i][j].denominator == 1 %}
-                                    {{ matmulresult[i][j] }}
-                                {% else %}
-                                    <sup>{{ matmulresult[i][j].numerator }}</sup>&frasl;<sub>{{ matmulresult[i][j].denominator }}</sub>
-                                {% endif %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-
-                {% endfor %}
-
-            </table>
-        </div>
-
-
-    {% endif %}
-
-
-    <!--Matrix Inverse-->
-
-    {% if choice == 'inv' %}
-        <h3>Matrix Inverse Calculator</h3>
-
-        <form action="http://localhost:5000/invresult" method="POST">
-
-            <table class="matrix">
-                {% for i in range(0, dim) %}
-
-                    <tr>
-
-                    {% for j in range(0, dim) %}
-                        <td class="matrixCell">
-                            <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrixString != null %}  value="{{ matrixString[i][j] }}" {% endif %} >
-                        </td>
+                    {% for i in range(0, dim-1) %}
+                        <br>
                     {% endfor %}
 
-                    </tr>
-
-                {% endfor %}
-            </table>
-
-            <br>
-            <br>
-
-            <input class="button" type="submit" value="submit">
-        </form>
-
-        <form class="reset" action="http://localhost:5000/">
-
-            <input class="button" type="submit" value="home">
-
-            <br>
-            <br>
-            <br>
-        </form>
+                    = &nbsp;
 
 
-    {% endif %}
+                    {% if detstr.denominator == 1 %}
+                        {{ detstr }}
+                    {% else %}
+                        <sup>{{ detstr.numerator }}</sup>&frasl;<sub>{{ detstr.denominator }}</sub>
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
 
 
-    {% if inv != null %}
-        <div>
-            <table class="matrix">
-                {% for i in range(0, dim) %}
-                    <tr>
-                        {% for j in range(0, dim) %}
-                            <td class="matrixText">{{ matrixString[i][j] }}</td>
+            <!--Matrix multiplication-->
+
+            {% if choice == 'matmul' %}
+                <h2>Matrix Multiplication Calculator</h2>
+
+
+                <p class="description">Please fill in the entries below with the corresponding elements of the {{ m1_1 }} by {{ m1_2 }} and {{ m2_1 }} by {{ m2_2 }} matrices.
+                    Click "submit" to calculate the matrix product of the provided matrices.
+                </p>
+
+                <form action = "http://localhost:5000/matmulresult" method = "POST">
+
+                    <div class="childDiv">
+                        Matrix One:
+
+                        <br>
+
+                        <table class="matrix">
+                            {% for i in range(0, m1_1) %}
+
+                                <tr>
+
+                                {% for j in range(0, m1_2) %}
+                                    <td class="matrixCell">
+                                        <input class="matrixentry" type="text" name="matrixOne[{{ i }}][{{ j }}]" {% if matrixOneString != null %}  value="{{ matrixOneString[i][j] }}" {% endif %} >
+                                    </td>
+                                {% endfor %}
+
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+
+
+                    <div class="childDiv">
+                        Matrix Two:
+
+                        <br>
+
+                        <table class="matrix">
+                            {% for i in range(0, m2_1) %}
+
+                                <tr>
+
+                                {% for j in range(0, m2_2) %}
+                                    <td class="matrixCell">
+                                        <input class="matrixentry" type="text" name="matrixTwo[{{ i }}][{{ j }}]" {% if matrixTwoString != null %}  value="{{ matrixTwoString[i][j] }}" {% endif %} >
+                                    </td>
+                                {% endfor %}
+
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+
+
+
+                    <br clear="all">
+                    <br>
+
+
+                    <input class="button" type="submit" value="submit">
+
+
+                </form>
+
+                <form class="reset" action="http://localhost:5000/">
+
+                    <input class="button" type="submit" value="home">
+
+                    <br>
+                    <br>
+                </form>
+            {% endif %}
+
+            {% if matmulresult != null or columnvector != null %}
+
+                <br>
+
+
+                <div class="matmuldisplay">
+
+                    <table class="matrix">
+                        {% for i in range(0, m1_1) %}
+
+                            <tr>
+                                {% for j in range(0, m1_2) %}
+                                    <td class="matrixText">
+                                        {{ matrixOneString[i][j] }}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
+
+                        {% endfor %}
+                    </table>
+                </div>
+
+
+                <div class="matmuldisplay">
+
+                    <table class="matrix">
+
+                        {% for i in range(0, m2_1) %}
+
+                            <tr>
+                                {% for j in range(0, m2_2) %}
+                                    <td class="matrixText">
+                                        {{ matrixTwoString[i][j] }}
+                                    </td>
+                                {% endfor %}
+                            </tr>
+
                         {% endfor %}
 
-                    </tr>
-
-                {% endfor %}
-            </table>
-
-        </div>
-
-        <div class="inversesup">-1</div>
-
-        <div class="display">
-            {% for i in range(0, dim) %}
-                <br>
-            {% endfor %}
-            =
-        </div>
-
-        <div class="display">
-            <table class="matrix">
-                {% for i in range(0, dim) %}
-                    <tr>
-                        {% for j in range(0, dim) %}
-                            <td class="matrixText">
-                                {% if inv[i][j].denominator == 1 %}
-                                    {{ inv[i][j] }}
-                                {% else %}
-                                    <sup>{{ inv[i][j].numerator }}</sup>&frasl;<sub>{{ inv[i][j].denominator }}</sub>
-                                {% endif %}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-
-    {% endif %}
-
-    {% if singular != null %}
-        <h1 class="error">{{ error }}</h1>
-
-        <p>{{ message }}</p>
-    {% endif %}
+                    </table>
+                </div>
 
 
-    <!-- RREF calculator-->
+                <div class="display">
+                    <p>=</p>
+                </div>
 
-    {% if choice == 'rref' %}
-        <h3>RREF Calculator</h3>
-
-        <form action="http://localhost:5000/rrefresult" method="POST">
-
-            <table class="matrix">
-                {% for i in range(0, dim1) %}
-
-                    <tr>
-
-                    {% for j in range(0, dim2) %}
-                        <td class="matrixCell">
-                            <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrix_string != null %}  value="{{ matrix_string[i][j] }}" {% endif %} >
-                        </td>
-                    {% endfor %}
-
-                    </tr>
-
-                {% endfor %}
-            </table>
-
-            <br>
-            <br>
-
-            <input class="button" type="submit" value="submit">
-
-        </form>
-
-        <form class="reset" action="http://localhost:5000/">
-
-            <input class="button" type="submit" value="home">
-
-            <br>
-            <br>
-            <br>
-        </form>
+                <div class="matmuldisplay" style="margin-right: 2%;">
 
 
-    {% endif %}
+                    <table class="matrix">
 
-    {% if rref != null %}
+                        {% for i in range(0, m1_1) %}
 
-        <div>
-            {% for i in range(0, dim1) %}
-                <br>
-            {% endfor %}
+                            <tr>
+                                {% for j in range(0, m2_2) %}
+                                    <td class="matrixText">
+                                        {% if matmulresult[i][j].denominator == 1 %}
+                                            {{ matmulresult[i][j] }}
+                                        {% else %}
+                                            <sup>{{ matmulresult[i][j].numerator }}</sup>&frasl;<sub>{{ matmulresult[i][j].denominator }}</sub>
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
 
-            RREF of
-        </div>
-
-        <div class="display">
-            <table class="matrix">
-                {% for i in range(0, dim1) %}
-                    <tr>
-                        {% for j in range(0, dim2) %}
-                            <td class="matrixText">{{ matrix_string[i][j] }}</td>
                         {% endfor %}
 
-                    </tr>
+                    </table>
+                </div>
 
-                {% endfor %}
-            </table>
 
-        </div>
+            {% endif %}
 
-        <div class="display">
-            {% for i in range(0, dim1) %}
-                <br>
-            {% endfor %}
-            =
-        </div>
 
-        <div class="display">
-            <table class="matrix">
-                {% for i in range(0, dim1) %}
-                    <tr>
-                        {% for j in range(0, dim2) %}
+            <!--Matrix Inverse-->
 
-                            {% if rref[i][j].denominator == 1 %}
-                                <td class="matrixText">{{ rref[i][j] }}</td>
-                            {% else %}
-                                <td class="matrixText">
-                                    <sup>{{ rref[i][j].numerator }}</sup>&frasl;<sub>{{ rref[i][j].denominator }}</sub>
+            {% if choice == 'inv' %}
+                <h2>Matrix Inverse Calculator</h2>
+
+                <p class="description">Please fill in the entries below with the corresponding elements of your {{ dim }} by {{ dim }} matrix. Click "submit" to calculate the inverse of the provided matrix.</p>
+
+                <form action="http://localhost:5000/invresult" method="POST">
+
+                    <table class="matrix">
+                        {% for i in range(0, dim) %}
+
+                            <tr>
+
+                            {% for j in range(0, dim) %}
+                                <td class="matrixCell">
+                                    <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrixString != null %}  value="{{ matrixString[i][j] }}" {% endif %} >
                                 </td>
-                            {% endif %}
+                            {% endfor %}
 
+                            </tr>
 
                         {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+                    </table>
+
+                    <br>
+                    <br>
+
+                    <input class="button" type="submit" value="submit">
+                </form>
+
+                <form class="reset" action="http://localhost:5000/">
+
+                    <input class="button" type="submit" value="home">
+
+                    <br>
+                    <br>
+                    <br>
+                </form>
 
 
-
-    {% endif %}
-
+            {% endif %}
 
 
-    <!--Eigenspace Calculator-->
+            {% if inv != null %}
+                <div>
+                    <table class="matrix">
+                        {% for i in range(0, dim) %}
+                            <tr>
+                                {% for j in range(0, dim) %}
+                                    <td class="matrixText">{{ matrixString[i][j] }}</td>
+                                {% endfor %}
 
-    {% if choice == 'eig' %}
-        <h2>Eigenspace Calculator</h2>
+                            </tr>
 
-        <p style="color: red;">
-            **Warning: Due to the fact that eigenbasis isn't unique, this program may produce different eigenvectors than what you may expect. Because of this, the result you get here may not match the result you may get by
-            hand. If you want a fully simplified version, you may need to put the eigenvectors into the RREF Calculator to retrieve the fully simplified form
-        </p>
+                        {% endfor %}
+                    </table>
 
-        <form action="http://localhost:5000/eigresult" method="POST">
+                </div>
 
-            <table class="matrix">
-                {% for i in range(0, dim) %}
+                <div class="inversesup">-1</div>
 
-                    <tr>
-
-                    {% for j in range(0, dim) %}
-                        <td class="matrixCell">
-                            <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrixString != null %}  value="{{ matrixString[i][j] }}" {% endif %} >
-                        </td>
+                <div class="display">
+                    {% for i in range(0, dim) %}
+                        <br>
                     {% endfor %}
+                    =
+                </div>
 
-                    </tr>
-
-                {% endfor %}
-            </table>
-
-            <br>
-            <br>
-
-            <input class="button" type="submit" value="submit">
-        </form>
-
-        <form class="reset" action="http://localhost:5000/">
-
-            <input class="button" type="submit" value="home">
-
-            <br>
-            <br>
-            <br>
-        </form>
-
-
-
-    {% endif %}
-
-
-    {% if eigenspace != null %}
-
-        <div class="display">
-            {% for i in range(0, dim) %}
-                <br>
-            {% endfor %}
-            Eigenspace of
-        </div>
-
-        <div class="display">
-            <table class="matrix">
-                {% for i in range(0, dim) %}
-                    <tr>
-                        {% for j in range(0, dim) %}
-                            <td class="matrixText">{{ matrixString[i][j] }}</td>
+                <div class="display">
+                    <table class="matrix">
+                        {% for i in range(0, dim) %}
+                            <tr>
+                                {% for j in range(0, dim) %}
+                                    <td class="matrixText">
+                                        {% if inv[i][j].denominator == 1 %}
+                                            {{ inv[i][j] }}
+                                        {% else %}
+                                            <sup>{{ inv[i][j].numerator }}</sup>&frasl;<sub>{{ inv[i][j].denominator }}</sub>
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            </tr>
                         {% endfor %}
+                    </table>
+                </div>
 
-                    </tr>
+            {% endif %}
 
-                {% endfor %}
-            </table>
+            {% if singular != null %}
+                <h1 class="error">{{ error }}</h1>
 
-        </div>
-
-        <div class="display">
-            {% for i in range(0, dim) %}
-                <br>
-            {% endfor %}
-            =
-        </div>
-
-        <br clear="all">
-        <br>
-        <br>
+                <p class="error_message">{{ message }}</p>
+            {% endif %}
 
 
+            <!-- RREF calculator-->
 
-        {% for i in range(0, num_eigenvalues) %}
-            <div class="display" style="font-size: 20px; margin-bottom: 10px;">
-                &lambda; = {{ eigenvalues[i] }}
+            {% if choice == 'rref' %}
+                <h2>RREF Calculator</h2>
 
-                <br><br>
+                <p class="description">Please fill in the entries below with the corresponding elements of your {{ dim1 }} by {{ dim2 }} matrix. Click "submit" to calculate the reduced echelon form of the provided matrix.</p>
 
-                <table class="matrix">
-                    {% for j in range(0, eigenspace[i]|length) %}
+                <form action="http://localhost:5000/rrefresult" method="POST">
 
+                    <table class="matrix">
+                        {% for i in range(0, dim1) %}
 
-                        <tr>
-                            {% if eigenspace[i][j].denominator == 1 %}
-                                <td class="matrixText">{{ eigenspace[i][j] }}</td>
-                            {% else %}
-                                <td class="matrixText">
-                                    <sup>{{ eigenspace[i][j].numerator }}</sup>&frasl;<sub>{{ eigenspace[i][j].denominator }}</sub>
+                            <tr>
+
+                            {% for j in range(0, dim2) %}
+                                <td class="matrixCell">
+                                    <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrix_string != null %}  value="{{ matrix_string[i][j] }}" {% endif %} >
                                 </td>
-                            {% endif %}
+                            {% endfor %}
 
-                        </tr>
+                            </tr>
 
+                        {% endfor %}
+                    </table>
+
+                    <br>
+                    <br>
+
+                    <input class="button" type="submit" value="submit">
+
+                </form>
+
+                <form class="reset" action="http://localhost:5000/">
+
+                    <input class="button" type="submit" value="home">
+
+                    <br>
+                    <br>
+                    <br>
+                </form>
+
+
+            {% endif %}
+
+            {% if rref != null %}
+
+                <div>
+                    {% for i in range(0, dim1) %}
+                        <br>
                     {% endfor %}
-                </table>
+
+                    RREF of
+                </div>
+
+                <div class="display">
+                    <table class="matrix">
+                        {% for i in range(0, dim1) %}
+                            <tr>
+                                {% for j in range(0, dim2) %}
+                                    <td class="matrixText">{{ matrix_string[i][j] }}</td>
+                                {% endfor %}
+
+                            </tr>
+
+                        {% endfor %}
+                    </table>
+
+                </div>
+
+                <div class="display">
+                    {% for i in range(0, dim1) %}
+                        <br>
+                    {% endfor %}
+                    =
+                </div>
+
+                <div class="display">
+                    <table class="matrix">
+                        {% for i in range(0, dim1) %}
+                            <tr>
+                                {% for j in range(0, dim2) %}
+
+                                    {% if rref[i][j].denominator == 1 %}
+                                        <td class="matrixText">{{ rref[i][j] }}</td>
+                                    {% else %}
+                                        <td class="matrixText">
+                                            <sup>{{ rref[i][j].numerator }}</sup>&frasl;<sub>{{ rref[i][j].denominator }}</sub>
+                                        </td>
+                                    {% endif %}
+
+
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
 
 
 
-            </div>
-        {% endfor %}
-
-    {% endif %}
-
-    {% if imaginary != null %}
-        <h1 class="error">{{ error }}</h1>
-
-        <p>{{ message }}</p>
-    {% endif %}
+            {% endif %}
 
 
 
+            <!--Eigenspace Calculator-->
+
+            {% if choice == 'eig' %}
+                <h2>Eigenspace Calculator</h2>
+
+                <p class="description">Please fill in the entries below with the corresponding elements of your matrix. Click "submit" to calculate the eigenvectors and eigenvalues of the provided matrix.</p>
+
+                <p style="color: red;">
+                    **Warning: Due to the fact that an eigenbasis isn't unique, this program may produce different eigenvectors than what you may expect. Because of this, the result you get here may not match the result you may get by
+                    hand. If you want a fully simplified version, you may need to put the eigenvectors into the RREF Calculator to retrieve the fully simplified form
+                    <br><br>
+                    ** This software does not calculate the eigenspace of matrices which produce imaginary roots. If you provide a matrix which has imaginary roots as solutions, you will get an error saying that the given matrix
+                    produces imaginary solutions.
+                </p>
+
+                <form action="http://localhost:5000/eigresult" method="POST">
+
+                    <table class="matrix">
+                        {% for i in range(0, dim) %}
+
+                            <tr>
+
+                            {% for j in range(0, dim) %}
+                                <td class="matrixCell">
+                                    <input class="matrixentry" type="text" name="matrix[{{ i }}][{{ j }}]" {% if matrixString != null %}  value="{{ matrixString[i][j] }}" {% endif %} >
+                                </td>
+                            {% endfor %}
+
+                            </tr>
+
+                        {% endfor %}
+                    </table>
+
+                    <br>
+                    <br>
+
+                    <input class="button" type="submit" value="submit">
+                </form>
+
+                <form class="reset" action="http://localhost:5000/">
+
+                    <input class="button" type="submit" value="home">
+
+                    <br>
+                    <br>
+                    <br>
+                </form>
+
+
+
+            {% endif %}
+
+
+            {% if eigenspace != null %}
+
+                <div class="display">
+                    {% for i in range(0, dim) %}
+                        <br>
+                    {% endfor %}
+                    Eigenspace of
+                </div>
+
+                <div class="display">
+                    <table class="matrix">
+                        {% for i in range(0, dim) %}
+                            <tr>
+                                {% for j in range(0, dim) %}
+                                    <td class="matrixText">{{ matrixString[i][j] }}</td>
+                                {% endfor %}
+
+                            </tr>
+
+                        {% endfor %}
+                    </table>
+
+                </div>
+
+                <div class="display">
+                    {% for i in range(0, dim) %}
+                        <br>
+                    {% endfor %}
+                    =
+                </div>
+
+                <br clear="all">
+                <br>
+                <br>
+
+
+
+                {% for i in range(0, num_eigenvalues) %}
+                    <div class="display" style="font-size: 20px; margin-bottom: 10px;">
+                        &lambda; = {{ eigenvalues[i] }}
+
+                        <br><br>
+
+                        <table class="matrix">
+                            {% for j in range(0, eigenspace[i]|length) %}
+
+
+                                <tr>
+                                    {% if eigenspace[i][j].denominator == 1 %}
+                                        <td class="matrixText">{{ eigenspace[i][j] }}</td>
+                                    {% else %}
+                                        <td class="matrixText">
+                                            <sup>{{ eigenspace[i][j].numerator }}</sup>&frasl;<sub>{{ eigenspace[i][j].denominator }}</sub>
+                                        </td>
+                                    {% endif %}
+
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+
+
+
+                    </div>
+                {% endfor %}
+
+            {% endif %}
+
+            {% if imaginary != null %}
+                <h1 class="error">{{ error }}</h1>
+
+                <p class="error_message">{{ message }}</p>
+            {% endif %}
+
+            {% if value_error != null %}
+                <h1 class="error">{{ error }}</h1>
+
+                <p class="error_message">{{ message }}</p>
+
+                <input class="button" type="button" value="back to form" onclick="history.back()">
+            {% endif %}
+        </div>
+
+
+    </div>
 
 </body>
 </html>

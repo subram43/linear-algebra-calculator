@@ -54,7 +54,7 @@ def eigresult():
                         row.append(float(input))
 
                 except ValueError:
-                    return render_template('error.html', error="Value Error", message="You entered invalid values")
+                    return render_template('form.html', value_error="True", error="Value Error", message="You entered invalid values")
 
             matrix_string.append(srow)
             matrix_list.append(row)
@@ -74,7 +74,7 @@ def eigresult():
 
         for i in range(0, len(list(eigenvalues))):
             if eigenvalues[i].imag != 0:
-                return render_template('form.html', choice="eig", imaginary="true", dim=dim, matrixString=matrix_string, error="Invalid Matrix", message="The solution to the eigenspace of this matrix is not real")
+                return render_template('form.html', choice="eig", imaginary="true", dim=dim, matrixString=matrix_string, error="Imaginary Solutions", message="The solution to this eigenspace produces imaginary roots!")
             else:
                 eigenvalues[i] = fractions.Fraction(eigenvalues[i].real).limit_denominator()
 

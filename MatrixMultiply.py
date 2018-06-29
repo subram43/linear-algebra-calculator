@@ -72,7 +72,7 @@ def matmulresult():
 
                         row.append(float(input))
                 except ValueError:
-                    return render_template('error.html', error="Value Error", message="You entered invalid values")
+                    return render_template('form.html', value_error="True", error="Value Error", message="You entered invalid values")
 
 
 
@@ -123,7 +123,7 @@ def matmulresult():
 
                         row.append(float(input))
                 except ValueError:
-                    return render_template('error.html', error="Value Error", message="You entered invalid values")
+                    return render_template('form.html', value_error="True", error="Value Error", message="You entered invalid values")
 
 
             matrix_two_string.append(srow)
