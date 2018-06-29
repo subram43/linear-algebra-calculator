@@ -97,6 +97,15 @@ div.bodyForm {
     float: none;
 }
 
+div.feedback {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    width: 100px;
+    text-align:right;
+    font-size: 20px;
+}
+
 .matrix {
     position: relative;
     margin-bottom: 20px;
