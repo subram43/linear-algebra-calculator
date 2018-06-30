@@ -16,7 +16,7 @@ application.register_blueprint(rref)
 def index():
 
     selected = -1
-    return "hello world"
+    return render_template("index.html", selected = selected)
 
 @application.route("/dimensions", methods=['POST', 'GET'])
 def dimensions():
