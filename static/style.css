@@ -63,8 +63,12 @@ div.display {
 }
 
 div.matmuldisplay {
-    margin-left: 2%;
+    margin-left: 4%;
     margin-bottom: 27px;
+}
+
+div.matmulequals {
+    margin-left: 4%;
 }
 
 div.inversesup {
