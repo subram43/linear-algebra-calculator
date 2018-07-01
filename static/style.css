@@ -27,10 +27,29 @@ form {
 
 select {
     font-size: 15px;
+    cursor: pointer;
+}
+
+option {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
+}
+
+a.head {
+    text-decoration: none;
+    color: deeppink;
+}
+
+a.head:hover {
+    text-shadow: 0 0 3px;
 }
 
 input.button {
     font-size: 16px;
+    cursor: pointer;
 }
 
 input.matrixentry {
