@@ -120,7 +120,7 @@
 
                 <p>
                     Welcome to the matrix multiplication calculator! This feature calculates the matrix product of any two matrices of up to size 20 by 20. Remember that for matrix multiplication to be valid,
-                    the second dimension of the first matrix must be equal to the first dimension of the second matrix. Select the dimensions of both matrices below and click "submit" to enter the elements of the matrices.
+                    the second dimension of matrix A must be equal to the first dimension of matrix B. Select the dimensions of both matrices below and click "submit" to enter the elements of the matrices.
                 </p>
 
                 <form action = "/matmulform" method="POST">
@@ -128,7 +128,7 @@
 
                     <br><br>
 
-                    Matrix One Dimensions:
+                    Matrix A Dimensions:
 
                     <select name="matrixOneDimOne">
                         {% for i in range(1, 21) %}
@@ -144,7 +144,7 @@
 
                     <br>
 
-                    Matrix Two Dimensions:
+                    Matrix B Dimensions:
 
                     <select name="matrixTwoDimOne" id="m21" onchange="changeTwo()">
                         {% for i in range(1, 21) %}
