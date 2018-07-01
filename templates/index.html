@@ -73,7 +73,7 @@
 
 
 
-            <form class="reset" action="www.linearalgebraplus.com/">
+            <form class="reset" action="/">
 
                 <input class="button" type="submit" value="reset">
 
@@ -115,7 +115,7 @@
                     the second dimension of the first matrix must be equal to the first dimension of the second matrix. Select the dimensions of both matrices below and click "submit" to enter the elements of the matrices.
                 </p>
 
-                <form action = "www.linearalgebraplus.com/matmulform" method="POST">
+                <form action = "/matmulform" method="POST">
                     Choose the dimension of your matrix:
 
                     <br><br>
@@ -165,7 +165,7 @@
                     to enter the elements of your matrix.
                 </p>
 
-                <form action = "www.linearalgebraplus.com/invform" method="POST">
+                <form action = "/invform" method="POST">
                     Choose the dimension of your matrix:
                     <select name="invdim">
                         {% for i in range(1, 21) %}
@@ -189,7 +189,7 @@
                     matrix. Just select the dimensions of your matrix below and click "submit" to enter the elements of your matrix.
                 </p>
 
-                <form action="www.linearalgebraplus.com/rrefform" method="POST">
+                <form action="/rrefform" method="POST">
                     Choose the dimensions of your matrix:
                     <select name="dim1">
                         {% for i in range(1, 21) %}
@@ -221,7 +221,7 @@
                     are real. Just select the dimensions of your matrix below and click "submit" to enter the elements of your matrix.
                 </p>
 
-                <form action="www.linearalgebraplus.com/eigform" method="POST">
+                <form action="/eigform" method="POST">
                     Choose the dimension of your matrix:
                     <select name="eigdim">
                         {% for i in range(1, 21) %}

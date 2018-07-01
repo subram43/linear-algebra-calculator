@@ -31,7 +31,7 @@
 
                 <p class="description">Please fill in the entries below with the corresponding elements of the {{ dim }} by {{ dim }} matrix. Click "submit" to calculate the determinant of the provided matrix.</p>
 
-                <form action = "www.linearalgebraplus.com/detresult" method = "POST">
+                <form action = "/detresult" method = "POST">
 
                     <table class="matrix">
                         {% for i in range(0, dim) %}
@@ -59,7 +59,7 @@
 
                 </form>
 
-                <form class="reset" action="www.linearalgebraplus.com/">
+                <form class="reset" action="/">
 
                     <input class="button" type="submit" value="home">
 
@@ -119,7 +119,7 @@
                     Click "submit" to calculate the matrix product of the provided matrices.
                 </p>
 
-                <form action = "www.linearalgebraplus.com/matmulresult" method = "POST">
+                <form action = "/matmulresult" method = "POST">
 
                     <div class="childDiv">
                         Matrix One:
@@ -177,7 +177,7 @@
 
                 </form>
 
-                <form class="reset" action="www.linearalgebraplus.com/">
+                <form class="reset" action="/">
 
                     <input class="button" type="submit" value="home">
 
@@ -269,7 +269,7 @@
 
                 <p class="description">Please fill in the entries below with the corresponding elements of your {{ dim }} by {{ dim }} matrix. Click "submit" to calculate the inverse of the provided matrix.</p>
 
-                <form action="www.linearalgebraplus.com/invresult" method="POST">
+                <form action="/invresult" method="POST">
 
                     <table class="matrix">
                         {% for i in range(0, dim) %}
@@ -293,7 +293,7 @@
                     <input class="button" type="submit" value="submit">
                 </form>
 
-                <form class="reset" action="www.linearalgebraplus.com/">
+                <form class="reset" action="/">
 
                     <input class="button" type="submit" value="home">
 
@@ -365,7 +365,7 @@
 
                 <p class="description">Please fill in the entries below with the corresponding elements of your {{ dim1 }} by {{ dim2 }} matrix. Click "submit" to calculate the reduced echelon form of the provided matrix.</p>
 
-                <form action="www.linearalgebraplus.com/rrefresult" method="POST">
+                <form action="/rrefresult" method="POST">
 
                     <table class="matrix">
                         {% for i in range(0, dim1) %}
@@ -390,7 +390,7 @@
 
                 </form>
 
-                <form class="reset" action="www.linearalgebraplus.com/">
+                <form class="reset" action="/">
 
                     <input class="button" type="submit" value="home">
 
@@ -476,7 +476,7 @@
                     produces imaginary solutions.
                 </p>
 
-                <form action="www.linearalgebraplus.com/eigresult" method="POST">
+                <form action="/eigresult" method="POST">
 
                     <table class="matrix">
                         {% for i in range(0, dim) %}
@@ -500,7 +500,7 @@
                     <input class="button" type="submit" value="submit">
                 </form>
 
-                <form class="reset" action="www.linearalgebraplus.com/">
+                <form class="reset" action="/">
 
                     <input class="button" type="submit" value="home">
 
