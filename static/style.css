@@ -26,10 +26,6 @@ select {
     cursor: pointer;
 }
 
-select:hover {
-    background-color: deeppink;
-}
-
 option {
     cursor: pointer;
 }
