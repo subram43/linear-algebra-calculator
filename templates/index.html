@@ -66,7 +66,7 @@
 
             <form action = "/dimensions" method = "POST">
 
-                <select name="choice">
+                <select class="nondim" name="choice">
                     <option disabled {% if selected == -1 %} selected="selected" {% endif %}></option>
                     <option value="det" {% if selected == 0 %} selected="selected"  {% endif %}  {% if selected != -1 and selected != 0 %} disabled {% endif %}>determinant</option>
                     <option value="matmul" {% if selected == 1 %} selected="selected" {% endif %} {% if selected != -1 and selected != 1 %} disabled {% endif %}>matrix multiplication</option>

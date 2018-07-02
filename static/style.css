@@ -1,13 +1,9 @@
-h1 {
-    color: deeppink;
-}
-
 h2 {
     font-size: 32px;
 }
 
 h1.title {
-    font-family: Chalkduster, sans-serif;
+    font-family: Chalkduster, Chalkboard, sans-serif;
     font-size: 50px;
 }
 
@@ -30,6 +26,10 @@ select {
     cursor: pointer;
 }
 
+select:hover {
+    background-color: deeppink;
+}
+
 option {
     cursor: pointer;
 }
@@ -50,6 +50,10 @@ a.head:hover {
 input.button {
     font-size: 16px;
     cursor: pointer;
+}
+
+input.button:hover {
+    box-shadow: 0 0 3px;
 }
 
 input.matrixentry {
