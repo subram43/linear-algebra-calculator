@@ -7,4 +7,6 @@ while studying. The web link to the site is www.linearalgebraplus.com. The softw
   * Inverse of a square matrix
   * Eigenvectors and eigenvalues of a square matrix
 
-In designing my web application, I used python and the flask library as the backend of my application script, with html/css design for the user interface. In order to change my html according to user selections, I used jinja2 to make my website work dynamically. I also used the numpy, scipy, fractions, and sympy libraries to perform linear algebra operations on the matrices.
+In designing my web application, I used python and the flask library as the backend of my application script, with html/css design for the user interface. In order to change my html according to user selections, I used jinja2 to make my website work dynamically. I also used the numpy, scipy, fractions, and sympy libraries to perform linear algebra operations on the matrices. 
+
+The purpose of my project was to create a simple software where students can quickly enter and modify matrices and get quick results. I also wanted to learn more about python's mathematical functions, flask, and how to build a dynamic web application in the process. I used www.heroku.com to deploy my website with heroku's command line tools. I really enjoyed working on this project as it helped me develop my software skills and build a software which others can use at the same time.
