@@ -36,7 +36,7 @@ a {
 
 a.head {
     text-decoration: none;
-    color: deeppink;
+    color: red;
 }
 
 a.head:hover {
