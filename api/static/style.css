@@ -10,7 +10,7 @@ h1.title {
 body {
     margin-top: 2px;
     margin-left: 2%;
-    background: greenyellow url("home_background_2.jpg");
+    background-color: cornflowerblue;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
