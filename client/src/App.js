@@ -36,12 +36,12 @@ function ResultOutput(props) {
       );
     });
 
-    result = <table className="matrix"><tbody>{matrixResult}</tbody></table>
+    result = <table className="matrix result"><tbody>{matrixResult}</tbody></table>
 
   }
 
   return (
-    <div>
+    <div className="row">
       Answer = {result}
     </div>
   );
@@ -54,7 +54,7 @@ class InputMatrix extends React.Component {
       var columnsForm = Array.from(Array(dimension2), (_, j) => j).map((j) => {
         return (
           <td key={`${i},${j}`}>
-            <input type="number" name={`${name}[${i}][${j}]`} id={`${name}[${i}][${j}]`} onChange={this.props.onModify} />
+            <input className="form-control" type="number" name={`${name}[${i}][${j}]`} id={`${name}[${i}][${j}]`} onChange={this.props.onModify} />
           </td>
         );
       });
@@ -87,7 +87,7 @@ class InputMatrix extends React.Component {
         {matrixOneTable}
         {matrixTwoTable}
 
-        <button onClick={this.props.onSubmit}>Submit</button>
+        <button className="btn btn-primary" type="submit" onClick={this.props.onSubmit}>Submit</button>
       </div>
     );
   }
@@ -104,25 +104,32 @@ function InputDimensions(props) {
   if (op === 'matmul') {
     // multiple matrices
     return (
-      <div>Matrix A Dimensions:
-        <select name="matrixOneDimOne" id="m11" onChange={callbackFunction}>{dimensionOptions}</select>
-        <select name="matrixOneDimTwo" id="m12" onChange={callbackFunction}>{dimensionOptions}</select> <br />
+      <div className="rowParent">
+        <div className="row">
+          Matrix A Dimensions:
+          <select className="form-control dimensions" name="matrixOneDimOne" id="m11" onChange={callbackFunction}>{dimensionOptions}</select>
+          <select className="form-control dimensions" name="matrixOneDimTwo" id="m12" onChange={callbackFunction}>{dimensionOptions}</select> <br />
+        </div>
 
-        Matrix B Dimensions:
-        <select name="matrixTwoDimOne" id="m21" onChange={callbackFunction}>{dimensionOptions}</select>
-        <select name="matrixTwoDimTwo" id="m22" onChange={callbackFunction}>{dimensionOptions}</select> <br />
+        <div className="row">
+          Matrix B Dimensions:
+          <select className="form-control dimensions" name="matrixTwoDimOne" id="m21" onChange={callbackFunction}>{dimensionOptions}</select>
+          <select className="form-control dimensions" name="matrixTwoDimTwo" id="m22" onChange={callbackFunction}>{dimensionOptions}</select> <br />
+        </div>
       </div>
     );
 
   } else {
     // single matrix
-    var matrixOneForm = <select name="matrixOneDimOne" id="m11" onChange={callbackFunction}>{dimensionOptions}</select>
-    var matrixTwoForm = op === "rref" ? <select name="matrixOneDimTwo" id="m12" onChange={callbackFunction}>{dimensionOptions}</select> : null;
+    var matrixOneForm = <select className="form-control dimensions" name="matrixOneDimOne" id="m11" onChange={callbackFunction}>{dimensionOptions}</select>
+    var matrixTwoForm = op === "rref" ? <select className="form-control dimensions" name="matrixOneDimTwo" id="m12" onChange={callbackFunction}>{dimensionOptions}</select> : null;
     return (
-      <div>
-        Matrix Dimensions: 
-        {matrixOneForm}
-        {matrixTwoForm}
+      <div className="rowParent">
+        <div className="row">
+          Matrix Dimensions: 
+          {matrixOneForm}
+          {matrixTwoForm}
+        </div>
       </div>
     );
   }
@@ -331,8 +338,8 @@ class App extends React.Component {
           <p>Just select which feature you would like to use and specify the dimensions of your matrix/matrices below.</p>
           <p>Which feature would you like to use?</p>
 
-          <div>
-            <select name="choice" defaultValue="none" onChange={this.handleOperationChange}>
+          <div className="input-group">
+            <select className="custom-select" name="choice" defaultValue="none" onChange={this.handleOperationChange}>
               <option value="none" disabled></option>
               <option value="det">determinant</option>
               <option value="matmul">matrix multiplication</option>
