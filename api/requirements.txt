@@ -2,3 +2,6 @@ Flask==1.1.2
 Flask-Cors==3.0.9
 numpy==1.17.3
 scipy==1.4.1
+Werkzeug==1.0.1
+grpcio==1.31.0
+gunicorn==19.7.1
