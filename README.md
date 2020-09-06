@@ -5,7 +5,6 @@ while studying. The web link to the site is www.linearalgebraplus.com. The softw
   * Matrix multiplication of two matrices
   * Row reduced echelon form of a matrix
   * Inverse of a square matrix
-  * Eigenvectors and eigenvalues of a square matrix
 
 In designing this web application, I used python and the flask library as the backend of my application script, with html/css design for the user interface. In order to change my html according to user selections, I used jinja2 to make my website work dynamically. I also used the numpy, scipy, fractions, and sympy libraries to perform linear algebra operations on the matrices. 
 
