@@ -56,65 +56,71 @@ class App extends React.Component {
   }
 
   handleMatrixInputChange(event) {
-    var matrices = this.state.matrices;
-
+    var inputChangedValue = parseFloat(event.target.value);
     var matrixInfo = getMatrixNameAndIndices(event.target.name);
     var matrixName = matrixInfo.matrixName;
     var rowIndex = matrixInfo.rowIndex;
     var columnIndex = matrixInfo.columnIndex;
 
-    if (matrixName === "matrixOne") {
-      matrices.matrixOne[rowIndex][columnIndex] = parseFloat(event.target.value);
-    } else {
-      matrices.matrixTwo[rowIndex][columnIndex] = parseFloat(event.target.value);
-    }
+    this.setState((state, _) => {
+      var matrices = state.matrices;
 
-    this.setState({
-      matrices: matrices,
+      if (matrixName === "matrixOne") {
+        matrices.matrixOne[rowIndex][columnIndex] = inputChangedValue;
+      } else {
+        matrices.matrixTwo[rowIndex][columnIndex] = inputChangedValue;
+      }
+
+      return {
+        matrices: matrices,
+      };
     });
   }
 
   handleDimensionChange(event) {
     var dimensionName = event.target.name;
-    var dimensions = this.state.dimensions;
     var changedDimensionValue = parseInt(event.target.value);
-    var op = this.state.operation;
+    
+    this.setState((state, _) => {
+      var dimensions = state.dimensions;
+      var op = state.operation;
 
-    if (dimensionName === "matrixOneDimOne") {
-      dimensions.matrixOneDimOne = changedDimensionValue;
-
-      if (op === "det" || op === "inv") {
+      if (dimensionName === "matrixOneDimOne") {
+        dimensions.matrixOneDimOne = changedDimensionValue;
+  
+        if (op === "det" || op === "inv") {
+          dimensions.matrixOneDimTwo = changedDimensionValue;
+        }
+  
+      } else if (dimensionName === "matrixOneDimTwo") {
+        $("#m21").val($("#m12").val()).change();
         dimensions.matrixOneDimTwo = changedDimensionValue;
+        dimensions.matrixTwoDimOne = changedDimensionValue;
+      
+      } else if (dimensionName === "matrixTwoDimOne") {
+        $("#m12").val($("#m21").val()).change();
+        dimensions.matrixOneDimTwo = changedDimensionValue;
+        dimensions.matrixTwoDimOne = changedDimensionValue;
+      
+      } else if (dimensionName === "matrixTwoDimTwo") {
+        dimensions.matrixTwoDimTwo = changedDimensionValue;
       }
+  
+      var newMatrixOne = new Array(dimensions.matrixOneDimOne).fill(NaN).map(() => new Array(dimensions.matrixOneDimTwo).fill(NaN));
+      var newMatrixTwo = new Array(dimensions.matrixTwoDimOne).fill(NaN).map(() => new Array(dimensions.matrixTwoDimTwo).fill(NaN));
+      var oldMatrixOne = this.state.matrices.matrixOne;
+      var oldMatrixTwo = this.state.matrices.matrixTwo;
+  
+      copyMatrix(oldMatrixOne, newMatrixOne);
+      copyMatrix(oldMatrixTwo, newMatrixTwo);
 
-    } else if (dimensionName === "matrixOneDimTwo") {
-      $("#m21").val($("#m12").val()).change();
-      dimensions.matrixOneDimTwo = changedDimensionValue;
-      dimensions.matrixTwoDimOne = changedDimensionValue;
-    
-    } else if (dimensionName === "matrixTwoDimOne") {
-      $("#m12").val($("#m21").val()).change();
-      dimensions.matrixOneDimTwo = changedDimensionValue;
-      dimensions.matrixTwoDimOne = changedDimensionValue;
-    
-    } else if (dimensionName === "matrixTwoDimTwo") {
-      dimensions.matrixTwoDimTwo = changedDimensionValue;
-    }
-
-    var newMatrixOne = new Array(dimensions.matrixOneDimOne).fill(NaN).map(() => new Array(dimensions.matrixOneDimTwo).fill(NaN));
-    var newMatrixTwo = new Array(dimensions.matrixTwoDimOne).fill(NaN).map(() => new Array(dimensions.matrixTwoDimTwo).fill(NaN));
-    var oldMatrixOne = this.state.matrices.matrixOne;
-    var oldMatrixTwo = this.state.matrices.matrixTwo;
-
-    copyMatrix(oldMatrixOne, newMatrixOne);
-    copyMatrix(oldMatrixTwo, newMatrixTwo);
-    
-    this.setState({
-      dimensions: dimensions,
-      matricesForm: <InputMatrix dimensions={dimensions} operation={this.state.operation} onModify={this.handleMatrixInputChange} onSubmit={this.submitQuery}/>,
-      matrices: {
-        matrixOne: newMatrixOne,
-        matrixTwo: newMatrixTwo,
+      return {
+        dimensions: dimensions,
+        matricesForm: <InputMatrix dimensions={dimensions} operation={this.state.operation} onModify={this.handleMatrixInputChange} onSubmit={this.submitQuery}/>,
+        matrices: {
+          matrixOne: newMatrixOne,
+          matrixTwo: newMatrixTwo,
+        }
       }
     });
 
