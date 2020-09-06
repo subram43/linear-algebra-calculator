@@ -7,8 +7,11 @@ function ResultOutput(props) {
   if (data == null) {
     return null;
   } else if (data.error != null) {
-    alert(data.error);
-    return null;
+    return (
+      <div className="row">
+        Answer = {data.error}
+      </div>
+    );
   }
 
   var operation = props.operation;
